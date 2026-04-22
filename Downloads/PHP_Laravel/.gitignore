@@ -1,0 +1,53 @@
+# Environments
+.env
+.env.backup
+.env.production
+.env.staging
+
+# Dependencies
+/vendor/
+/node_modules/
+/composer.phar
+/package-lock.json
+
+# IDE
+/.idea/
+/.vscode/
+*.sublime-*
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+/storage/*.log
+/storage/logs/*
+
+# Cache
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*
+
+# Backups
+*.sql
+*.sql.gz
+*.zip
+/storage/backups/*
+
+# Uploads
+/storage/app/public/uploads/*
+!/storage/app/public/uploads/.gitkeep
+
+# Testing
+/coverage/
+/coverage.xml
+.phpunit.result.cache
+.phpunit.cache
+
+# Compiled
+/public/css/*.css
+/public/js/*.js
+/public/mix-manifest.json
+
+# Docker
+.docker/data/
