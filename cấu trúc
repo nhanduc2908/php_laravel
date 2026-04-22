@@ -1,0 +1,719 @@
+security-assessment-platform/
+│
+├── 📄 .env.example                         # Mẫu biến môi trường
+├── 📄 .gitignore                           # Danh sách file bỏ qua khi commit
+├── 📄 docker-compose.yml                   # Docker orchestration chính
+├── 📄 docker-compose.dev.yml               # Docker cho môi trường dev
+├── 📄 docker-compose.prod.yml              # Docker cho production
+├── 📄 Makefile                             # Tự động hóa lệnh (make install, make test)
+├── 📄 README.md                            # Tài liệu hướng dẫn dự án
+├── 📄 LICENSE                              # Giấy phép sử dụng
+├── 📄 phpunit.xml                          # Cấu hình PHPUnit testing
+├── 📄 .eslintrc.js                         # Cấu hình ESLint cho JavaScript
+├── 📄 .prettierrc                          # Cấu hình Prettier format code
+│
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  🚀 BACKEND - PHP CORE FRAMEWORK
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📁 backend/
+│   │
+│   ├── 📄 index.php
+│   │   └── 🚪 ENTRY POINT: Khởi tạo autoloader, load config, kết nối DB, gọi Router, dispatch request
+│   │
+│   ├── 📄 .htaccess
+│   │   └── 🔧 APACHE CONFIG: Rewrite rules (điều hướng về index.php), security headers (CSP, XSS, CORS)
+│   │
+│   ├── 📄 composer.json
+│   │   └── 📦 DEPENDENCIES: Quản lý thư viện PHP (php:^8.1, firebase/php-jwt, monolog, phpmailer...)
+│   │
+│   ├── 📄 artisan
+│   │   └── 🛠️ CLI TOOL: Chạy lệnh (php artisan migrate, queue:work, test, make:controller)
+│   │
+│   │
+│   ├── 📁 api/                                                      # 🌐 API ROUTES (19 files)
+│   │   ├── 📄 v1.php                                                # Nhóm route version 1 (/api/v1/*)
+│   │   ├── 📄 auth.php                                              # 🔐 Xác thực: login, logout, register, refresh, me
+│   │   ├── 📄 users.php                                             # 👤 Quản lý user: CRUD, assign role, change password
+│   │   ├── 📄 roles.php                                             # 🎫 Quản lý role: CRUD, assign permissions
+│   │   ├── 📄 servers.php                                           # 🖥️ Quản lý server: CRUD, test connection, scan
+│   │   ├── 📄 categories.php                                        # 📂 17 categories: lấy danh sách, tree, criteria theo category
+│   │   ├── 📄 criteria.php                                          # 📋 280 criteria: CRUD, import/export Excel, search
+│   │   ├── 📄 assessments.php                                       # 🎯 Đánh giá: run assessment, get result, history, compliance
+│   │   ├── 📄 assessment-files.php                                  # 🆕 Quản lý tệp đánh giá: CRUD, share, version, upload
+│   │   ├── 📄 dashboard.php                                         # 📊 Dashboard: stats, charts, recent activities, trends
+│   │   ├── 📄 vulnerabilities.php                                   # 🐛 Lỗ hổng: CRUD, CVE lookup, mark fixed, severity stats
+│   │   ├── 📄 alerts.php                                            # ⚠️ Cảnh báo: CRUD, mark read, bulk actions, resolve
+│   │   ├── 📄 reports.php                                           # 📄 Báo cáo: generate, download PDF/Excel, schedule
+│   │   ├── 📄 backup.php                                            # 💾 Backup: create, restore, list, download, delete
+│   │   ├── 📄 profile.php                                           # 👤 Hồ sơ: view, update, avatar, change password, 2FA
+│   │   ├── 📄 audit.php                                             # 📜 Kiểm toán: view logs, filter by user/action, export
+│   │   ├── 📄 settings.php                                          # ⚙️ Cài đặt: get, update settings by group
+│   │   ├── 📄 dynamic-menu.php                                      # 🧭 Menu động: get menu by role, sidebar, permissions
+│   │   └── 📄 testing.php                                           # 🧪 Testing: run tests, get results, coverage, history
+│   │
+│   │
+│   ├── 📁 core/                                                     # ⚙️ CORE FRAMEWORK (16 files)
+│   │   ├── 📄 Autoload.php                                          # 📦 CLASS LOADER: Tự động tìm và load class theo namespace PSR-4
+│   │   ├── 📄 Router.php                                            # 🧭 ROUTER: Parse URL, match route, call controller, middleware pipeline
+│   │   ├── 📄 Controller.php                                        # 🎮 BASE CONTROLLER: json(), view(), validate(), authorize(), redirect()
+│   │   ├── 📄 Model.php                                             # 🗄️ BASE MODEL: find(), where(), save(), delete(), relationships
+│   │   ├── 📄 Database.php                                          # 🔌 DATABASE: PDO connection, query, prepare, transaction, raw SQL
+│   │   ├── 📄 JWT.php                                               # 🔐 JWT TOKEN: encode(), decode(), verify(), refresh(), getPayload()
+│   │   ├── 📄 Middleware.php                                        # 🛡️ MIDDLEWARE: handle(), then(), pipeline pattern for request/response
+│   │   ├── 📄 RBAC.php                                              # 🎫 ROLE BASED ACCESS: hasRole(), hasPermission(), assignRole(), can()
+│   │   ├── 📄 Validator.php                                         # ✅ VALIDATION: validate(), rules (required, email, min, max, unique)
+│   │   ├── 📄 Logger.php                                            # 📝 LOGGING: info(), error(), warning(), debug(), rotate(), search()
+│   │   ├── 📄 Cache.php                                             # 💾 CACHE: get(), set(), delete(), remember(), tags(), flush()
+│   │   ├── 📄 Encryption.php                                        # 🔒 ENCRYPTION: encrypt() AES-256, decrypt(), hash() bcrypt, verify()
+│   │   ├── 📄 Event.php                                             # 📡 EVENT SYSTEM: dispatch(), listen(), subscribe(), stopPropagation()
+│   │   ├── 📄 Queue.php                                             # ⏳ QUEUE: push(), process(), failed(), retry(), later()
+│   │   ├── 📄 Helper.php                                            # 🛠️ UTILITIES: dd(), env(), config(), response(), request(), session()
+│   │   └── 📄 TestCase.php                                          # 🧪 BASE TEST: setUp(), tearDown(), assertJson(), actingAs(), callApi()
+│   │
+│   │
+│   ├── 📁 controllers/                                              # 🎮 CONTROLLERS (18 files)
+│   │   ├── 📄 AuthController.php                                    # 🔐 Xử lý login/logout/register, tạo JWT token, refresh token
+│   │   ├── 📄 UserController.php                                    # 👤 CRUD users, assign role, change password, get user permissions
+│   │   ├── 📄 RoleController.php                                    # 🎫 CRUD roles, assign/revoke permissions, get role permissions
+│   │   ├── 📄 ServerController.php                                  # 🖥️ CRUD servers, test SSH connection, scan vulnerabilities
+│   │   ├── 📄 CategoryController.php                                # 📂 CRUD 17 categories, get criteria by category, tree view
+│   │   ├── 📄 CriteriaController.php                                # 📋 CRUD 280 criteria, import/export Excel, search, validate answers
+│   │   ├── 📄 AssessmentController.php                              # 🎯 Run assessment, calculate score, get results, history, compliance
+│   │   ├── 📄 AssessmentFileController.php                          # 🆕 CRUD tệp đánh giá, upload/download, share, version control
+│   │   ├── 📄 DashboardController.php                               # 📊 Get stats, charts data, recent activities, trends
+│   │   ├── 📄 VulnerabilityController.php                           # 🐛 CRUD vulnerabilities, CVE lookup, mark fixed, severity stats
+│   │   ├── 📄 AlertController.php                                   # ⚠️ CRUD alerts, mark read/unread, bulk actions, resolve
+│   │   ├── 📄 ReportController.php                                  # 📄 Generate reports, export PDF/Excel, schedule reports
+│   │   ├── 📄 BackupController.php                                  # 💾 Create backup, restore, list backups, download, delete
+│   │   ├── 📄 ProfileController.php                                 # 👤 View/update profile, upload avatar, change password, 2FA
+│   │   ├── 📄 AuditController.php                                   # 📜 View audit logs, filter by user/action/time, export
+│   │   ├── 📄 SettingController.php                                 # ⚙️ Get/update system settings by group, reset to default
+│   │   ├── 📄 DynamicMenuController.php                             # 🧭 Get menu by user role, build sidebar tree, get permissions
+│   │   └── 📄 TestingController.php                                 # 🧪 Run tests, get results, code coverage, test history
+│   │
+│   │
+│   ├── 📁 models/                                                   # 🗄️ MODELS (23 files)
+│   │   ├── 📄 User.php                                              # 👤 users: id, name, email, password, role_id, 2fa_secret, is_active
+│   │   ├── 📄 Role.php                                              # 🎫 roles: id, name, slug, description, level
+│   │   ├── 📄 Permission.php                                        # 🔐 permissions: id, name, slug, resource, action
+│   │   ├── 📄 Server.php                                            # 🖥️ servers: id, name, host, port, username, ssh_key, status
+│   │   ├── 📄 Category.php                                          # 📂 categories: id, name, code, description, parent_id, order
+│   │   ├── 📄 Criteria.php                                          # 📋 criteria: id, category_id, code, name, description, weight
+│   │   ├── 📄 AssessmentResult.php                                  # 🎯 assessment_results: id, server_id, criteria_id, score, evidence
+│   │   ├── 📄 AssessmentReport.php                                  # 📄 assessment_reports: id, server_id, total_score, compliance_percent
+│   │   ├── 📄 AssessmentFile.php                                    # 🆕 assessment_files: id, title, content, server_id, created_by, status, version
+│   │   ├── 📄 AssessmentFileShare.php                               # 🆕 assessment_file_shares: id, file_id, shared_with, permission, expires_at
+│   │   ├── 📄 AssessmentFileVersion.php                             # 🆕 assessment_file_versions: id, file_id, version, content, created_by
+│   │   ├── 📄 Vulnerability.php                                     # 🐛 vulnerabilities: id, server_id, cve, name, severity, fix
+│   │   ├── 📄 VulnerabilityHistory.php                              # 📜 vulnerability_history: id, vulnerability_id, status, changed_by
+│   │   ├── 📄 Alert.php                                             # ⚠️ alerts: id, type, severity, message, is_read, created_at
+│   │   ├── 📄 AlertNote.php                                         # 📝 alert_notes: id, alert_id, note, created_by
+│   │   ├── 📄 AuditLog.php                                          # 📜 audit_logs: id, user_id, action, resource, ip, user_agent
+│   │   ├── 📄 Backup.php                                            # 💾 backups: id, filename, size, type, status, created_at
+│   │   ├── 📄 Setting.php                                           # ⚙️ settings: id, key, value, group, type
+│   │   ├── 📄 Session.php                                           # 🍪 sessions: id, user_id, token, ip, expires_at
+│   │   ├── 📄 Token.php                                             # 🔑 tokens: id, user_id, refresh_token, expires_at
+│   │   ├── 📄 Notification.php                                      # 🔔 notifications: id, user_id, type, data, read_at
+│   │   ├── 📄 TestResult.php                                        # 🧪 test_results: id, test_suite, test_name, status, duration, message
+│   │   └── 📄 TestSuite.php                                         # 🧪 test_suites: id, name, description, tests_count
+│   │
+│   │
+│   ├── 📁 middleware/                                               # 🛡️ MIDDLEWARE (11 files)
+│   │   ├── 📄 AuthMiddleware.php                                    # ✅ Kiểm tra JWT token, load user info, reject if not authenticated
+│   │   ├── 📄 PermissionMiddleware.php                              # 🎫 Kiểm tra user có quyền truy cập resource không
+│   │   ├── 📄 AssessmentFilePermissionMiddleware.php                 # 🆕 Kiểm tra quyền với tệp đánh giá (view/edit/delete/share)
+│   │   ├── 📄 RateLimitMiddleware.php                               # ⏱️ Giới hạn số request/phút (chống DDoS)
+│   │   ├── 📄 CorsMiddleware.php                                    # 🌍 Xử lý CORS headers cho phép cross-origin
+│   │   ├── 📄 SecurityHeadersMiddleware.php                         # 🛡️ Thêm headers bảo mật: CSP, HSTS, X-Frame-Options
+│   │   ├── 📄 LogMiddleware.php                                     # 📝 Ghi log mọi request (method, URL, IP, response time)
+│   │   ├── 📄 CacheMiddleware.php                                   # 💾 Cache GET responses để tăng tốc
+│   │   ├── 📄 MaintenanceMiddleware.php                             # 🔧 Chặn request khi đang bảo trì hệ thống
+│   │   ├── 📄 JsonMiddleware.php                                    # 📄 Force JSON response (Content-Type: application/json)
+│   │   └── 📄 CsrfMiddleware.php                                    # 🛡️ Kiểm tra CSRF token cho POST/PUT/DELETE requests
+│   │
+│   │
+│   ├── 📁 services/                                                 # 💼 SERVICES (14 files)
+│   │   ├── 📄 AuthService.php                                       # 🔐 Logic xác thực: verify credentials, generate tokens
+│   │   ├── 📄 ScannerService.php                                    # 🔍 Quét server: SSH connection, run commands, parse results
+│   │   ├── 📄 ScoreCalculatorService.php                            # 📊 Tính điểm: weighted score, compliance percentage
+│   │   ├── 📄 AttackDetectorService.php                             # 🚨 Phát hiện tấn công: brute force, DDoS, suspicious patterns
+│   │   ├── 📄 SshConnectionService.php                              # 🔌 Kết nối SSH: connect, execute command, disconnect
+│   │   ├── 📄 ApiCallService.php                                    # 🌐 Gọi API ngoài: CVE API, NVD API, weather API
+│   │   ├── 📄 FileUploadService.php                                 # 📁 Upload file: validate type/size, store, generate thumbnails
+│   │   ├── 📄 AssessmentFileService.php                             # 🆕 Quản lý tệp: CRUD, version control, share, search
+│   │   ├── 📄 BackupService.php                                     # 💾 Backup DB: dump database, compress, store, restore
+│   │   ├── 📄 RealtimeService.php                                   # ⚡ Realtime: push events qua WebSocket
+│   │   ├── 📄 ReportGeneratorService.php                            # 📄 Tạo báo cáo: PDF, Excel, CSV từ template
+│   │   ├── 📄 NotificationService.php                               # 📧 Gửi thông báo: email, push notification, SMS
+│   │   ├── 📄 ImportExportService.php                               # 📥 Xuất nhập: import/export criteria từ Excel
+│   │   └── 📄 TestRunnerService.php                                 # 🧪 Chạy test: execute test suites, collect results, coverage
+│   │
+│   │
+│   ├── 📁 repositories/                                             # 🗃️ REPOSITORIES (8 files)
+│   │   ├── 📄 UserRepository.php                                    # User queries: findByEmail, getByRole, getActiveUsers
+│   │   ├── 📄 ServerRepository.php                                  # Server queries: getByStatus, getActive, getByUser
+│   │   ├── 📄 CriteriaRepository.php                                # Criteria queries: getByCategory, search, getWeighted
+│   │   ├── 📄 AssessmentRepository.php                              # Assessment queries: getHistory, getScore, getCompliance
+│   │   ├── 📄 AssessmentFileRepository.php                          # 🆕 File queries: getByServer, getByUser, search, filter
+│   │   ├── 📄 AlertRepository.php                                   # Alert queries: getUnread, getBySeverity, getByUser
+│   │   ├── 📄 ReportRepository.php                                  # Report queries: getByUser, getByDate, getScheduled
+│   │   └── 📄 TestRepository.php                                    # Test queries: getResults, getCoverage, getHistory
+│   │
+│   │
+│   ├── 📁 jobs/                                                     # ⏰ JOBS (10 files)
+│   │   ├── 📄 ScanServerJob.php                                     # 🔍 Quét server (background): chạy async để không block
+│   │   ├── 📄 SendEmailJob.php                                      # 📧 Gửi email (background): queue để gửi hàng loạt
+│   │   ├── 📄 GenerateReportJob.php                                 # 📄 Tạo báo cáo (background): generate PDF/Excel
+│   │   ├── 📄 BackupDatabaseJob.php                                 # 💾 Backup database tự động theo lịch
+│   │   ├── 📄 CleanupLogsJob.php                                    # 🧹 Dọn log cũ (30 ngày) để tiết kiệm dung lượng
+│   │   ├── 📄 SyncServersJob.php                                    # 🔄 Đồng bộ dữ liệu server từ nguồn bên ngoài
+│   │   ├── 📄 CheckVulnerabilitiesJob.php                           # 🐛 Kiểm tra CVE mới từ NVD database
+│   │   ├── 📄 SendAlertJob.php                                      # ⚠️ Gửi alert cho user khi có lỗ hổng mới
+│   │   ├── 📄 RunTestSuiteJob.php                                   # 🧪 Chạy test suite định kỳ
+│   │   └── 📄 CleanExpiredSharesJob.php                             # 🆕 Xóa share tệp đã hết hạn
+│   │
+│   │
+│   ├── 📁 listeners/                                                # 👂 EVENT LISTENERS (7 files)
+│   │   ├── 📄 SendLoginNotification.php                             # 📧 Gửi email thông báo khi user đăng nhập
+│   │   ├── 📄 LogUserAction.php                                     # 📝 Ghi log mọi hành động của user
+│   │   ├── 📄 CreateAuditTrail.php                                  # 📜 Tạo audit trail cho thay đổi dữ liệu
+│   │   ├── 📄 SendAlertOnVulnerability.php                          # ⚠️ Gửi alert khi phát hiện lỗ hổng mới
+│   │   ├── 📄 UpdateDashboardCache.php                              # 💾 Cập nhật cache dashboard khi có thay đổi
+│   │   ├── 📄 PushRealtimeEvent.php                                 # ⚡ Push event realtime qua WebSocket
+│   │   └── 📄 NotifyFileShared.php                                  # 🆕 Thông báo khi có tệp được chia sẻ
+│   │
+│   │
+│   ├── 📁 exceptions/                                               # ❌ CUSTOM EXCEPTIONS (10 files)
+│   │   ├── 📄 ValidationException.php                               # Lỗi validation: input không hợp lệ
+│   │   ├── 📄 AuthException.php                                     # Lỗi xác thực: sai password, token hết hạn
+│   │   ├── 📄 PermissionException.php                               # Lỗi phân quyền: không có quyền truy cập
+│   │   ├── 📄 NotFoundException.php                                 # Lỗi 404: không tìm thấy resource
+│   │   ├── 📄 DatabaseException.php                                 # Lỗi database: connection failed, query error
+│   │   ├── 📄 ScanException.php                                     # Lỗi scan: SSH connection failed, timeout
+│   │   ├── 📄 BackupException.php                                   # Lỗi backup: disk full, permission denied
+│   │   ├── 📄 ApiException.php                                      # Lỗi API: external API failed, timeout
+│   │   ├── 📄 TestException.php                                     # Lỗi test: assertion failed, setup error
+│   │   └── 📄 FileException.php                                     # 🆕 Lỗi tệp: upload failed, file too large, invalid type
+│   │
+│   │
+│   ├── 📁 config/                                                   # ⚙️ CONFIGURATION (14 files)
+│   │   ├── 📄 app.php                                               # App config: name, env, debug, timezone, locale
+│   │   ├── 📄 database.php                                          # Database: MySQL host, port, name, user, password
+│   │   ├── 📄 jwt.php                                               # JWT: secret key, expiry time, algorithm
+│   │   ├── 📄 rbac.php                                              # RBAC: roles mapping, permissions hierarchy
+│   │   ├── 📄 criteria_categories.php                               # 17 categories definition
+│   │   ├── 📄 criteria_280.php                                      # 280 criteria definition
+│   │   ├── 📄 menu.php                                              # Menu structure by role (có menu tệp đánh giá)
+│   │   ├── 📄 mail.php                                              # Mail: SMTP host, port, username, password
+│   │   ├── 📄 cache.php                                             # Cache: driver (file/redis), default TTL
+│   │   ├── 📄 queue.php                                             # Queue: driver (database/redis), connection
+│   │   ├── 📄 filesystems.php                                       # Storage: disk (local/s3), path, permissions
+│   │   ├── 📄 services.php                                          # External services: CVE API, NVD API keys
+│   │   ├── 📄 testing.php                                           # Testing: coverage threshold, test suites
+│   │   └── 📄 assessment-files.php                                  # 🆕 File config: allowed types, max size, version limit
+│   │
+│   │
+│   ├── 📁 lang/                                                     # 🌍 LANGUAGE FILES (15 files - 3 languages)
+│   │   ├── 📁 en/                                                   # English
+│   │   │   ├── 📄 auth.php                                          # Auth messages: login success, logout, invalid credentials
+│   │   │   ├── 📄 validation.php                                    # Validation messages: required, email, min, max
+│   │   │   ├── 📄 criteria.php                                      # Criteria labels and descriptions
+│   │   │   ├── 📄 messages.php                                      # General system messages
+│   │   │   ├── 📄 testing.php                                       # Testing messages
+│   │   │   └── 📄 assessment-files.php                              # 🆕 File management messages
+│   │   ├── 📁 vi/                                                   # Tiếng Việt (same structure)
+│   │   └── 📁 ja/                                                   # 日本語 (same structure)
+│   │
+│   │
+│   ├── 📁 storage/                                                  # 💾 STORAGE
+│   │   ├── 📁 logs/                                                 # Log files (10 files)
+│   │   │   ├── 📄 app.log                                           # Application logs
+│   │   │   ├── 📄 auth.log                                          # Authentication logs
+│   │   │   ├── 📄 scan.log                                          # Scan logs
+│   │   │   ├── 📄 error.log                                         # Error logs
+│   │   │   ├── 📄 attack.log                                        # Attack detection logs
+│   │   │   ├── 📄 api.log                                           # API call logs
+│   │   │   ├── 📄 database.log                                      # Database query logs
+│   │   │   ├── 📄 cron.log                                          # Cron job logs
+│   │   │   ├── 📄 debug.log                                         # Debug logs
+│   │   │   └── 📄 test.log                                          # Test execution logs
+│   │   ├── 📁 uploads/                                              # Uploaded files
+│   │   │   ├── 📁 evidence/                                         # Bằng chứng từ assessment
+│   │   │   ├── 📁 reports/                                          # Generated reports (PDF, Excel)
+│   │   │   ├── 📁 avatars/                                          # User avatar images
+│   │   │   ├── 📁 temp/                                             # Temporary files
+│   │   │   └── 📁 assessment-files/                                 # 🆕 Tệp đánh giá
+│   │   │       ├── 📁 documents/                                    # Tài liệu đánh giá
+│   │   │       ├── 📁 attachments/                                  # File đính kèm
+│   │   │       └── 📁 versions/                                     # Các phiên bản cũ
+│   │   ├── 📁 backups/                                              # Backup files
+│   │   │   ├── 📁 database/                                         # Database dumps
+│   │   │   └── 📁 files/                                            # File backups
+│   │   ├── 📁 cache/                                                # Cache storage
+│   │   │   ├── 📁 data/                                             # Data cache
+│   │   │   ├── 📁 views/                                            # View cache
+│   │   │   └── 📁 sessions/                                         # Session cache
+│   │   └── 📁 framework/                                            # Framework files
+│   │       ├── 📁 sessions/                                         # PHP sessions
+│   │       ├── 📁 cache/                                            # Framework cache
+│   │       └── 📁 views/                                            # Compiled views
+│   │
+│   │
+│   ├── 📁 bootstrap/                                                # 🚀 BOOTSTRAP (3 files)
+│   │   ├── 📄 app.php                                               # Khởi tạo application container, load config
+│   │   ├── 📄 routes.php                                            # Đăng ký tất cả routes từ thư mục api/
+│   │   └── 📄 middleware.php                                        # Đăng ký middleware pipeline (toàn cục và nhóm)
+│   │
+│   │
+│   ├── 📁 database/                                                 # 🗄️ DATABASE MANAGEMENT
+│   │   ├── 📁 migrations/                                           # Database migrations (43 files)
+│   │   │   ├── 📄 2024_01_01_000001_create_users_table.php          # Tạo bảng users
+│   │   │   ├── 📄 2024_01_01_000002_create_roles_table.php          # Tạo bảng roles
+│   │   │   ├── 📄 2024_01_01_000003_create_permissions_table.php    # Tạo bảng permissions
+│   │   │   ├── 📄 2024_01_01_000004_create_role_permission_table.php # Bảng trung gian role_permission
+│   │   │   ├── 📄 2024_01_01_000005_create_categories_table.php     # 17 categories
+│   │   │   ├── 📄 2024_01_01_000006_create_criteria_table.php       # 280 criteria
+│   │   │   ├── 📄 2024_01_01_000007_create_servers_table.php        # Bảng servers
+│   │   │   ├── 📄 2024_01_01_000008_create_user_server_table.php    # Bảng trung gian user_server
+│   │   │   ├── 📄 2024_01_01_000009_create_assessment_results_table.php # Kết quả đánh giá
+│   │   │   ├── 📄 2024_01_01_000010_create_assessment_reports_table.php # Báo cáo đánh giá
+│   │   │   ├── 📄 2024_01_01_000011_create_assessment_files_table.php # 🆕 Bảng tệp đánh giá
+│   │   │   ├── 📄 2024_01_01_000012_create_assessment_file_shares_table.php # 🆕 Bảng chia sẻ tệp
+│   │   │   ├── 📄 2024_01_01_000013_create_assessment_file_versions_table.php # 🆕 Bảng phiên bản tệp
+│   │   │   ├── 📄 2024_01_01_000014_create_vulnerabilities_table.php # Bảng lỗ hổng
+│   │   │   ├── 📄 2024_01_01_000015_create_vulnerability_history_table.php # Lịch sử lỗ hổng
+│   │   │   ├── 📄 2024_01_01_000016_create_alerts_table.php         # Bảng cảnh báo
+│   │   │   ├── 📄 2024_01_01_000017_create_alert_notes_table.php    # Ghi chú cảnh báo
+│   │   │   ├── 📄 2024_01_01_000018_create_audit_logs_table.php     # Audit logs
+│   │   │   ├── 📄 2024_01_01_000019_create_login_attempts_table.php # Lần đăng nhập thất bại
+│   │   │   ├── 📄 2024_01_01_000020_create_user_sessions_table.php  # User sessions
+│   │   │   ├── 📄 2024_01_01_000021_create_password_resets_table.php # Reset password tokens
+│   │   │   ├── 📄 2024_01_01_000022_create_backups_table.php        # Bảng backup
+│   │   │   ├── 📄 2024_01_01_000023_create_system_settings_table.php # Cài đặt hệ thống
+│   │   │   ├── 📄 2024_01_01_000024_create_notifications_table.php  # Thông báo
+│   │   │   ├── 📄 2024_01_01_000025_create_attack_logs_table.php    # Log tấn công
+│   │   │   ├── 📄 2024_01_01_000026_create_blocked_ips_table.php    # IP bị chặn
+│   │   │   ├── 📄 2024_01_01_000027_create_cve_cache_table.php      # Cache CVE data
+│   │   │   ├── 📄 2024_01_01_000028_create_api_logs_table.php       # API call logs
+│   │   │   ├── 📄 2024_01_01_000029_create_rate_limits_table.php    # Rate limiting
+│   │   │   ├── 📄 2024_01_01_000030_create_report_schedules_table.php # Lịch báo cáo
+│   │   │   ├── 📄 2024_01_01_000031_create_jobs_table.php           # Queue jobs
+│   │   │   ├── 📄 2024_01_01_000032_create_failed_jobs_table.php    # Jobs thất bại
+│   │   │   ├── 📄 2024_01_01_000033_create_test_results_table.php   # Kết quả test
+│   │   │   ├── 📄 2024_01_01_000034_create_test_suites_table.php    # Test suites
+│   │   │   ├── 📄 2024_01_01_000035_create_test_cases_table.php     # Test cases
+│   │   │   ├── 📄 2024_01_01_000036_create_test_executions_table.php # Lịch sử chạy test
+│   │   │   ├── 📄 2024_01_01_000037_create_test_metrics_table.php   # Metrics test
+│   │   │   ├── 📄 2024_01_15_000001_add_indexes_to_users_table.php  # Index cho users
+│   │   │   ├── 📄 2024_01_15_000002_add_indexes_to_criteria_table.php # Index cho criteria
+│   │   │   ├── 📄 2024_01_15_000003_add_indexes_to_assessment_results_table.php
+│   │   │   ├── 📄 2024_01_15_000004_add_indexes_to_alerts_table.php
+│   │   │   ├── 📄 2024_01_15_000005_add_indexes_to_audit_logs_table.php
+│   │   │   ├── 📄 2024_01_15_000006_add_foreign_keys_table.php      # Khóa ngoại
+│   │   │   ├── 📄 2024_01_20_000001_add_two_factor_fields_to_users_table.php # 2FA
+│   │   │   ├── 📄 2024_01_20_000002_add_soft_deletes_to_servers_table.php # Soft delete
+│   │   │   ├── 📄 2024_01_20_000003_add_status_to_assessment_reports_table.php
+│   │   │   ├── 📄 2024_01_20_000004_add_test_indexes_table.php
+│   │   │   └── 📄 2024_01_20_000005_add_assessment_file_indexes_table.php # 🆕 Index cho tệp
+│   │   │
+│   │   └── 📁 seeds/                                                 # Database seeders (10 files)
+│   │       ├── 📄 DatabaseSeeder.php                                 # Main seeder: gọi tất cả seeder khác
+│   │       ├── 📄 RoleSeeder.php                                     # Seed roles: super_admin, admin, security_officer, viewer, auditor
+│   │       ├── 📄 PermissionSeeder.php                               # Seed permissions: manage_users, view_reports, run_assessments...
+│   │       ├── 📄 CategorySeeder.php                                 # Seed 17 categories
+│   │       ├── 📄 CriteriaSeeder.php                                 # Seed 280 criteria
+│   │       ├── 📄 UserSeeder.php                                     # Seed default users (admin, security, viewer)
+│   │       ├── 📄 ServerSeeder.php                                   # Seed demo servers
+│   │       ├── 📄 AssessmentFileSeeder.php                           # 🆕 Seed tệp đánh giá mẫu
+│   │       ├── 📄 TestDataSeeder.php                                 # Seed dữ liệu test
+│   │       └── 📄 MenuSeeder.php                                     # Seed menu configuration
+│   │
+│   │
+│   ├── 📁 tests/                                                     # 🧪 TESTS (60+ files)
+│   │   ├── 📁 Unit/                                                  # Unit tests (10 files)
+│   │   │   ├── 📄 AuthTest.php                                       # Test xác thực
+│   │   │   ├── 📄 RBACTest.php                                       # Test phân quyền
+│   │   │   ├── 📄 CriteriaTest.php                                   # Test criteria
+│   │   │   ├── 📄 ScoreCalculatorTest.php                            # Test tính điểm
+│   │   │   ├── 📄 ScannerTest.php                                    # Test scanner
+│   │   │   ├── 📄 ValidatorTest.php                                  # Test validation
+│   │   │   ├── 📄 EncryptionTest.php                                 # Test mã hóa
+│   │   │   ├── 📄 CacheTest.php                                      # Test cache
+│   │   │   ├── 📄 JWTTest.php                                        # Test JWT
+│   │   │   └── 📄 AssessmentFileTest.php                             # 🆕 Test tệp đánh giá
+│   │   ├── 📁 Feature/                                               # Feature tests (11 files)
+│   │   │   ├── 📄 ApiAuthTest.php                                    # Test API auth
+│   │   │   ├── 📄 ApiCriteriaTest.php                                # Test API criteria
+│   │   │   ├── 📄 ApiAssessmentTest.php                              # Test API assessment
+│   │   │   ├── 📄 ApiAssessmentFileTest.php                          # 🆕 Test API tệp
+│   │   │   ├── 📄 ApiReportTest.php                                  # Test API report
+│   │   │   ├── 📄 ApiServerTest.php                                  # Test API server
+│   │   │   ├── 📄 ApiUserTest.php                                    # Test API user
+│   │   │   ├── 📄 ApiRoleTest.php                                    # Test API role
+│   │   │   ├── 📄 ApiAlertTest.php                                   # Test API alert
+│   │   │   ├── 📄 ApiBackupTest.php                                  # Test API backup
+│   │   │   └── 📄 ApiDashboardTest.php                               # Test API dashboard
+│   │   ├── 📁 Integration/                                           # Integration tests (6 files)
+│   │   ├── 📁 Performance/                                           # Performance tests (5 files)
+│   │   ├── 📁 Security/                                              # Security tests (6 files)
+│   │   ├── 📁 Browser/                                               # Browser tests (5 files)
+│   │   ├── 📁 API/                                                   # API contract tests (4 files)
+│   │   ├── 📁 Database/                                              # Database tests (5 files)
+│   │   ├── 📁 Mock/                                                  # Mock tests (4 files)
+│   │   ├── 📁 Regression/                                            # Regression tests (3 files)
+│   │   ├── 📁 Acceptance/                                            # Acceptance tests (3 files)
+│   │   ├── 📁 E2E/                                                   # End-to-End tests (4 files)
+│   │   ├── 📄 TestCase.php                                           # Base test case
+│   │   └── 📄 CreatesApplication.php                                 # Create app for testing
+│   │
+│   ├── 📄 phpunit.xml                                                 # PHPUnit configuration
+│   └── 📄 artisan                                                     # Laravel-style CLI tool
+│
+│
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  🎨 FRONTEND - 1 FILE PAGE DUY NHẤT + MODULES THEO ROLE
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📁 frontend/
+│   │
+│   ├── 📄 index.html                                                   # 🏠 CHỈ 1 FILE PAGE DUY NHẤT! Load tất cả nội dung động
+│   │
+│   ├── 📁 modules/                                                     # 📦 MODULES - Chức năng theo role
+│   │   │
+│   │   ├── 📁 assessment-files/                                        # 🆕 MODULE QUẢN LÝ TỆP ĐÁNH GIÁ
+│   │   │   ├── 📄 index.js                                             # 📋 Trang danh sách tệp (hiển thị grid/table)
+│   │   │   ├── 📄 create.js                                            # ➕ Form tạo tệp mới (tiêu đề, nội dung, server)
+│   │   │   ├── 📄 edit.js                                              # ✏️ Form sửa tệp (chỉ hiện nếu có quyền)
+│   │   │   ├── 📄 detail.js                                            # 📄 Chi tiết tệp (xem nội dung, attachments)
+│   │   │   ├── 📄 delete.js                                            # 🗑️ Xóa tệp (có confirm, chỉ admin/super admin)
+│   │   │   ├── 📄 share.js                                             # 🔄 Chia sẻ tệp với user/role khác
+│   │   │   ├── 📄 version.js                                           # 📜 Xem lịch sử phiên bản, rollback
+│   │   │   ├── 📄 upload.js                                            # 📂 Upload file đính kèm (PDF, DOC, XLS, IMG)
+│   │   │   ├── 📄 download.js                                          # 📥 Download tệp hoặc attachment
+│   │   │   ├── 📄 search.js                                            # 🔍 Tìm kiếm tệp theo tiêu đề, nội dung, tag
+│   │   │   ├── 📄 filter.js                                            # 🎯 Lọc tệp theo server, status, ngày tạo
+│   │   │   ├── 📄 template.js                                          # 📝 Mẫu tệp đánh giá có sẵn
+│   │   │   │
+│   │   │   ├── 📁 components/                                          # Component con
+│   │   │   │   ├── 📄 FileList.js                                      # Danh sách tệp dạng table
+│   │   │   │   ├── 📄 FileCard.js                                      # Card hiển thị tệp (grid view)
+│   │   │   │   ├── 📄 FileForm.js                                      # Form tạo/sửa tệp (dùng chung)
+│   │   │   │   ├── 📄 FilePreview.js                                   # Xem trước nội dung tệp
+│   │   │   │   ├── 📄 FileTree.js                                      # Cây thư mục tệp
+│   │   │   │   ├── 📄 ShareModal.js                                    # Modal chia sẻ tệp
+│   │   │   │   ├── 📄 VersionHistory.js                                # Lịch sử phiên bản
+│   │   │   │   └── 📄 UploadZone.js                                    # Khu vực kéo thả upload
+│   │   │   │
+│   │   │   └── 📁 permissions/                                         # Phân quyền theo role
+│   │   │       ├── 📄 super-admin.js                                   # 🔐 Full quyền: create, read, update, delete, share
+│   │   │       ├── 📄 admin.js                                         # 👑 Tạo, sửa, xóa tệp của mình và team
+│   │   │       ├── 📄 security.js                                      # 🔒 Tạo, sửa tệp, chỉ xóa của mình
+│   │   │       ├── 📄 viewer.js                                        # 👁️ Chỉ xem tệp được chia sẻ, không tạo/sửa/xóa
+│   │   │       └── 📄 auditor.js                                       # 📊 Xem tất cả tệp, không được sửa/xóa
+│   │   │
+│   │   ├── 📁 dashboard/                                               # Dashboard module
+│   │   │   ├── 📄 super-admin.js                                       # Dashboard cho Super Admin (thống kê toàn hệ thống)
+│   │   │   ├── 📄 admin.js                                             # Dashboard cho Admin
+│   │   │   ├── 📄 security.js                                          # Dashboard cho Security Officer
+│   │   │   ├── 📄 viewer.js                                            # Dashboard cho Viewer
+│   │   │   └── 📄 auditor.js                                           # Dashboard cho Auditor
+│   │   │
+│   │   ├── 📁 users/                                                   # User management module
+│   │   │   ├── 📄 index.js                                             # Danh sách user (chỉ admin/super admin)
+│   │   │   ├── 📄 add.js                                               # Thêm user mới
+│   │   │   ├── 📄 edit.js                                              # Sửa thông tin user
+│   │   │   └── 📄 permissions.js                                       # Phân quyền cho user
+│   │   │
+│   │   ├── 📁 servers/                                                 # Server management module
+│   │   │   ├── 📄 index.js                                             # Danh sách server
+│   │   │   ├── 📄 add.js                                               # Thêm server mới
+│   │   │   ├── 📄 edit.js                                              # Sửa server
+│   │   │   └── 📄 detail.js                                            # Chi tiết server (kèm assessment)
+│   │   │
+│   │   ├── 📁 criteria/                                                # Criteria module
+│   │   │   ├── 📄 index.js                                             # 280 criteria list
+│   │   │   ├── 📄 add.js                                               # Thêm criteria mới
+│   │   │   ├── 📄 edit.js                                              # Sửa criteria
+│   │   │   └── 📄 import.js                                            # Import từ Excel
+│   │   │
+│   │   ├── 📁 assessments/                                             # Assessment module
+│   │   │   ├── 📄 index.js                                             # Lịch sử đánh giá
+│   │   │   ├── 📄 run.js                                               # Chạy đánh giá mới
+│   │   │   └── 📄 detail.js                                            # Chi tiết kết quả đánh giá
+│   │   │
+│   │   ├── 📁 vulnerabilities/                                         # Vulnerability module
+│   │   │   ├── 📄 index.js                                             # Danh sách lỗ hổng
+│   │   │   └── 📄 detail.js                                            # Chi tiết lỗ hổng (CVE)
+│   │   │
+│   │   ├── 📁 alerts/                                                  # Alert module
+│   │   │   ├── 📄 index.js                                             # Danh sách cảnh báo
+│   │   │   └── 📄 detail.js                                            # Chi tiết cảnh báo
+│   │   │
+│   │   ├── 📁 reports/                                                 # Report module
+│   │   │   ├── 📄 index.js                                             # Danh sách báo cáo
+│   │   │   ├── 📄 generate.js                                          # Tạo báo cáo mới
+│   │   │   └── 📄 export.js                                            # Xuất PDF/Excel
+│   │   │
+│   │   ├── 📁 audit/                                                   # Audit module
+│   │   │   └── 📄 logs.js                                              # Xem audit logs
+│   │   │
+│   │   ├── 📁 backup/                                                  # Backup module
+│   │   │   ├── 📄 index.js                                             # Danh sách backup
+│   │   │   └── 📄 restore.js                                           # Phục hồi backup
+│   │   │
+│   │   ├── 📁 settings/                                                # Settings module
+│   │   │   ├── 📄 index.js                                             # Cài đặt hệ thống
+│   │   │   └── 📄 system.js                                            # Cài đặt nâng cao
+│   │   │
+│   │   ├── 📁 profile/                                                 # Profile module
+│   │   │   └── 📄 index.js                                             # Hồ sơ cá nhân
+│   │   │
+│   │   └── 📁 testing/                                                 # Testing module
+│   │       ├── 📄 index.js                                             # Dashboard test
+│   │       ├── 📄 runner.js                                            # Chạy test
+│   │       ├── 📄 results.js                                           # Kết quả test
+│   │       ├── 📄 coverage.js                                          # Code coverage (SA only)
+│   │       └── 📄 security.js                                          # Security tests
+│   │
+│   ├── 📁 config/                                                      # ⚙️ Cấu hình client
+│   │   ├── 📄 roles.config.js                                          # Định nghĩa menu và quyền theo role
+│   │   ├── 📄 permissions.config.js                                    # Chi tiết quyền cho từng action
+│   │   └── 📄 routes.config.js                                         # Client-side routes
+│   │
+│   ├── 📁 layouts/                                                     # 🎨 Layout components
+│   │   ├── 📄 sidebar.js                                               # Sidebar động theo role
+│   │   ├── 📄 header.js                                                # Header (avatar, notifications)
+│   │   ├── 📄 footer.js                                                # Footer
+│   │   └── 📄 main.js                                                  # Main layout renderer
+│   │
+│   ├── 📁 assets/
+│   │   ├── 📁 css/
+│   │   │   ├── 📄 main.css                                             # Style chính
+│   │   │   ├── 📄 responsive.css                                       # Responsive design
+│   │   │   ├── 📄 dark-mode.css                                        # Dark mode theme
+│   │   │   ├── 📄 print.css                                            # Print styles
+│   │   │   └── 📄 assessment-files.css                                 # 🆕 Style cho module tệp
+│   │   │
+│   │   ├── 📁 js/
+│   │   │   ├── 📄 app.js                                               # 🚀 App khởi tạo, load modules
+│   │   │   ├── 📄 router.js                                            # 🧭 Client-side router (hashchange)
+│   │   │   ├── 📄 auth.js                                              # 🔐 Xác thực, lưu token, logout
+│   │   │   ├── 📄 role-manager.js                                      # 🎫 Quản lý role, kiểm tra quyền
+│   │   │   ├── 📄 api.js                                               # 🌐 Gọi API (axios wrapper)
+│   │   │   ├── 📄 utils.js                                             # 🛠️ Utilities (format date, toast)
+│   │   │   ├── 📄 charts.js                                            # 📊 Charts (Chart.js)
+│   │   │   ├── 📄 socket.js                                            # ⚡ WebSocket client
+│   │   │   └── 📄 assessment-files.js                                  # 🆕 JS cho module tệp
+│   │   │
+│   │   ├── 📁 vendor/                                                  # Third-party libraries
+│   │   │   ├── 📁 bootstrap/                                           # Bootstrap 5 CSS/JS
+│   │   │   ├── 📁 jquery/                                              # jQuery
+│   │   │   ├── 📁 chart.js/                                            # Chart.js
+│   │   │   ├── 📁 socket.io/                                           # Socket.IO client
+│   │   │   ├── 📁 datatables/                                          # DataTables
+│   │   │   ├── 📁 fontawesome/                                         # Font Awesome icons
+│   │   │   ├── 📁 sweetalert/                                          # SweetAlert2
+│   │   │   └── 📁 tinymce/                                             # 🆕 Rich text editor
+│   │   │
+│   │   └── 📁 images/
+│   │       ├── 📁 logo/                                                # Logo images
+│   │       │   ├── 📄 logo.png
+│   │       │   ├── 📄 logo-white.png
+│   │       │   └── 📄 favicon.ico
+│   │       ├── 📁 icons/                                               # Icon files
+│   │       │   ├── 📄 critical.svg
+│   │       │   ├── 📄 high.svg
+│   │       │   ├── 📄 medium.svg
+│   │       │   ├── 📄 low.svg
+│   │       │   ├── 📄 test-pass.svg
+│   │       │   ├── 📄 test-fail.svg
+│   │       │   └── 📄 test-running.svg
+│   │       └── 📁 file-types/                                          # 🆕 Icon cho loại file
+│   │           ├── 📄 pdf.svg
+│   │           ├── 📄 doc.svg
+│   │           ├── 📄 xls.svg
+│   │           ├── 📄 ppt.svg
+│   │           ├── 📄 img.svg
+│   │           └── 📄 zip.svg
+│   │
+│   └── 📁 templates/                                                   # HTML templates
+│       ├── 📄 modal.html                                               # Modal dialog template
+│       └── 📄 loading.html                                             # Loading spinner template
+│
+│
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  ⚡ REALTIME - WEBSOCKET SERVER (Node.js)
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📁 realtime/
+│   ├── 📄 server.js                                                     # 🚀 WebSocket server entry point
+│   ├── 📄 package.json                                                  # 📦 Node.js dependencies (socket.io, redis)
+│   ├── 📄 .env                                                          # 🔧 Realtime environment config
+│   ├── 📄 ecosystem.config.js                                           # PM2 config cho production
+│   │
+│   ├── 📁 src/
+│   │   ├── 📄 index.js                                                  # Entry point
+│   │   ├── 📄 app.js                                                    # App initialization
+│   │   │
+│   │   ├── 📁 config/
+│   │   │   ├── 📄 database.js                                           # Database connection
+│   │   │   ├── 📄 redis.js                                              # Redis connection (pub/sub)
+│   │   │   └── 📄 socket.js                                             # Socket.IO config
+│   │   │
+│   │   ├── 📁 middleware/
+│   │   │   ├── 📄 auth.js                                               # Authenticate socket connection
+│   │   │   ├── 📄 rateLimit.js                                          # Rate limiting for sockets
+│   │   │   └── 📄 logger.js                                             # Log socket events
+│   │   │
+│   │   ├── 📁 handlers/
+│   │   │   ├── 📄 connection.js                                         # Handle new connections
+│   │   │   ├── 📄 auth.js                                               # Handle auth events
+│   │   │   ├── 📄 alert.js                                              # Push alerts realtime
+│   │   │   ├── 📄 scan.js                                               # Push scan progress
+│   │   │   ├── 📄 assessment.js                                         # Push assessment results
+│   │   │   ├── 📄 metric.js                                             # Push metric updates
+│   │   │   ├── 📄 notification.js                                       # Push notifications
+│   │   │   └── 📄 file.js                                               # 🆕 Push file share notifications
+│   │   │
+│   │   ├── 📁 rooms/
+│   │   │   ├── 📄 userRoom.js                                           # User-specific rooms
+│   │   │   ├── 📄 serverRoom.js                                         # Server-specific rooms
+│   │   │   ├── 📄 adminRoom.js                                          # Admin broadcast room
+│   │   │   └── 📄 fileRoom.js                                           # 🆕 File share room
+│   │   │
+│   │   └── 📁 utils/
+│   │       ├── 📄 logger.js                                             # Logging utility
+│   │       └── 📄 helpers.js                                            # Helper functions
+│   │
+│   └── 📁 tests/
+│       ├── 📄 socket.test.js                                            # Test socket connections
+│       └── 📄 handler.test.js                                           # Test event handlers
+│
+│
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  🗄️ DATABASE - SQL SCRIPTS
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📁 database/
+│   ├── 📄 schema.sql                                                     # Full database schema
+│   ├── 📄 seed_all.sql                                                   # Seed all data
+│   ├── 📄 seed_categories_17.sql                                         # Seed 17 categories
+│   ├── 📄 seed_criteria_280.sql                                          # Seed 280 criteria
+│   ├── 📄 seed_roles.sql                                                 # Seed roles
+│   ├── 📄 seed_permissions.sql                                           # Seed permissions
+│   ├── 📄 seed_users.sql                                                 # Seed default users
+│   ├── 📄 seed_assessment_files.sql                                      # 🆕 Seed tệp đánh giá mẫu
+│   │
+│   ├── 📁 migrations/                                                    # SQL migrations (12 files)
+│   │   ├── 📄 V1__Create_users_table.sql
+│   │   ├── 📄 V2__Create_roles_table.sql
+│   │   ├── 📄 V3__Create_categories_table.sql
+│   │   ├── 📄 V4__Create_criteria_table.sql
+│   │   ├── 📄 V5__Create_servers_table.sql
+│   │   ├── 📄 V6__Create_assessment_results_table.sql
+│   │   ├── 📄 V7__Create_reports_table.sql
+│   │   ├── 📄 V8__Create_alerts_table.sql
+│   │   ├── 📄 V9__Create_vulnerabilities_table.sql
+│   │   ├── 📄 V10__Create_audit_logs_table.sql
+│   │   ├── 📄 V11__Create_assessment_files_table.sql                     # 🆕 Tạo bảng tệp
+│   │   └── 📄 V12__Add_indexes.sql
+│   │
+│   ├── 📁 procedures/                                                    # Stored procedures (4 files)
+│   │   ├── 📄 sp_calculate_score.sql                                     # Tính điểm compliance
+│   │   ├── 📄 sp_get_dashboard_stats.sql                                 # Lấy thống kê dashboard
+│   │   ├── 📄 sp_cleanup_old_logs.sql                                    # Dọn log cũ
+│   │   └── 📄 sp_generate_report.sql                                     # Tạo báo cáo
+│   │
+│   ├── 📁 triggers/                                                      # Database triggers (3 files)
+│   │   ├── 📄 trg_audit_user_changes.sql                                 # Audit thay đổi user
+│   │   ├── 📄 trg_update_server_score.sql                                # Cập nhật điểm server
+│   │   └── 📄 trg_create_alert_on_fail.sql                               # Tạo alert khi fail
+│   │
+│   └── 📁 views/                                                         # Database views (3 files)
+│       ├── 📄 vw_server_summary.sql                                      # Tổng quan server
+│       ├── 📄 vw_compliance_status.sql                                   # Trạng thái tuân thủ
+│       └── 📄 vw_monthly_trend.sql                                       # Xu hướng theo tháng
+│
+│
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  📚 DOCUMENTATION
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📁 docs/
+│   ├── 📄 README.md                                                      # Tổng quan dự án
+│   ├── 📄 INSTALLATION.md                                                # Hướng dẫn cài đặt
+│   ├── 📄 DEPLOYMENT.md                                                  # Hướng dẫn triển khai
+│   │
+│   ├── 📁 api/                                                           # API documentation
+│   │   ├── 📄 authentication.md                                          # API xác thực
+│   │   ├── 📄 users.md                                                   # API users
+│   │   ├── 📄 criteria.md                                                # API criteria
+│   │   ├── 📄 assessments.md                                             # API assessments
+│   │   ├── 📄 assessment-files.md                                        # 🆕 API tệp đánh giá
+│   │   ├── 📄 reports.md                                                 # API reports
+│   │   └── 📄 openapi.yaml                                               # OpenAPI spec
+│   │
+│   ├── 📁 guides/                                                        # User guides
+│   │   ├── 📄 user-manual.md                                             # Hướng dẫn người dùng
+│   │   ├── 📄 admin-manual.md                                            # Hướng dẫn admin
+│   │   ├── 📄 security-officer-guide.md                                  # Hướng dẫn security officer
+│   │   └── 📄 viewer-guide.md                                            # Hướng dẫn viewer
+│   │
+│   ├── 📁 references/                                                    # Reference documents
+│   │   ├── 📄 280-criteria-list.md                                       # Danh sách 280 tiêu chí
+│   │   ├── 📄 17-categories.md                                           # 17 categories
+│   │   ├── 📄 scoring-formula.md                                         # Công thức tính điểm
+│   │   ├── 📄 rbac-matrix.md                                             # Ma trận phân quyền
+│   │   └── 📄 compliance-mapping.md                                      # Mapping tuân thủ
+│   │
+│   └── 📁 architecture/                                                  # Architecture docs
+│       ├── 📄 system-architecture.png                                    # Sơ đồ kiến trúc
+│       ├── 📄 database-er-diagram.png                                    # ER diagram
+│       └── 📄 sequence-diagrams.md                                       # Sequence diagrams
+│
+│
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  🔧 SCRIPTS
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📁 scripts/
+│   ├── 📄 deploy.sh                                                      # Deploy script
+│   ├── 📄 backup.sh                                                      # Backup script
+│   ├── 📄 restore.sh                                                     # Restore script
+│   ├── 📄 import_criteria.php                                            # Import criteria từ Excel
+│   ├── 📄 export_criteria.php                                            # Export criteria ra Excel
+│   ├── 📄 run_assessment.php                                             # Chạy assessment từ CLI
+│   ├── 📄 clean_logs.php                                                 # Dọn log cũ
+│   ├── 📄 create_admin.php                                               # Tạo admin user
+│   ├── 📄 reset_password.php                                             # Reset password
+│   ├── 📄 generate_report.php                                            # Tạo báo cáo từ CLI
+│   ├── 📄 monitor.php                                                    # Monitor hệ thống
+│   ├── 📄 sync_servers.php                                               # Đồng bộ server
+│   ├── 📄 run_tests.sh                                                   # Chạy toàn bộ test
+│   ├── 📄 test_report_generator.php                                      # Tạo báo cáo test
+│   └── 📄 migrate_assessment_files.php                                   # 🆕 Migration cho tệp
+│
+│
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  🚀 CI/CD & DEPLOYMENT
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📁 .github/workflows/
+│   ├── 📄 deploy.yml                                                      # Deploy workflow
+│   ├── 📄 test.yml                                                        # Run tests workflow
+│   ├── 📄 backup.yml                                                      # Backup workflow
+│   └── 📄 security-scan.yml                                               # Security scan workflow
+│
+├── 📁 .docker/
+│   ├── 📄 Dockerfile.php                                                  # PHP container
+│   ├── 📄 Dockerfile.nginx                                                # Nginx container
+│   ├── 📄 Dockerfile.node                                                 # Node container
+│   └── 📄 docker-entrypoint.sh                                            # Entrypoint script
+│
+└── 📁 .k8s/
+    ├── 📄 deployment.yaml                                                 # K8s deployment
+    ├── 📄 service.yaml                                                    # K8s service
+    ├── 📄 ingress.yaml                                                    # K8s ingress
+    ├── 📄 configmap.yaml                                                  # K8s configmap
+    └── 📄 secret.yaml                                                     # K8s secret
