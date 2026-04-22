@@ -1,0 +1,45 @@
+<template>
+    <div class="vulnerabilities-management">
+        <div class="header-actions">
+            <h2>Quản lý lỗ hổng bảo mật</h2>
+            <button class="btn-secondary" @click="scanAll">
+                <i class="fas fa-search"></i> Quét tất cả
+            </button>
+        </div>
+
+        <div class="filters">
+            <select v-model="severityFilter" @change="fetchVulnerabilities">
+                <option value="">Tất cả mức độ</option>
+                <option value="critical">Nghiêm trọng</option>
+                <option value="high">Cao</option>
+                <option value="medium">Trung bình</option>
+                <option value="low">Thấp</option>
+            </select>
+            <select v-model="serverFilter" @change="fetchVulnerabilities">
+                <option value="">Tất cả máy chủ</option>
+                <option v-for="server in servers" :key="server.id" :value="server.id">{{ server.name }}</option>
+            </select>
+            <input type="text" v-model="search" placeholder="Tìm CVE..." @input="fetchVulnerabilities">
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>CVE</th><th>Tên</th><th>Máy chủ</th><th>Mức độ</th><th>CVSS</th><th>Trạng thái</th><th>Thao tác</th></tr>
+            </thead>
+            <tbody>
+                <tr v-for="vuln in vulnerabilities" :key="vuln.id">
+                    <td class="cve">{{ vuln.cve || 'N/A' }}</td>
+                    <td>{{ vuln.name }}</td>
+                    <td>{{ vuln.server_name }}</td>
+                    <td><span :class="`severity-${vuln.severity}`">{{ vuln.severity }}</span></td>
+                    <td>{{ vuln.cvss_score }}</td>
+                    <td><span :class="vuln.status === 'fixed' ? 'badge-success' : 'badge-warning'">{{ vuln.status }}</span></td>
+                    <td class="actions">
+                        <button @click="viewDetail(vuln.id)"><i class="fas fa-eye"></i></button>
+                        <button @click="markFixed(vuln.id)" v-if="vuln.status !== 'fixed'"><i class="fas fa-check"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
