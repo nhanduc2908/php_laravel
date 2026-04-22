@@ -586,7 +586,175 @@ frontend/src/views/
 │   │       ├── 📄 BackupRestoreFlowTest.php
 │   │       └── 📄 AssessmentFileFlowTest.php
 │   │
-│   └── 📁 vendor/                        # Composer dependencies
+│ backend/vendor/
+│
+├── 📁 composer/                           # Composer autoloader và cài đặt
+│   ├── 📄 autoload_psr4.php              # PSR-4 autoload mapping
+│   ├── 📄 autoload_real.php              # Autoloader khởi tạo
+│   ├── 📄 autoload_static.php            # Static autoloader optimization
+│   ├── 📄 ClassLoader.php                # Class loader logic
+│   ├── 📄 installed.json                 # Danh sách packages đã cài
+│   ├── 📄 platform_check.php             # Kiểm tra platform requirements
+│   └── 📄 LICENSE
+│
+├── 📁 laravel/                            # Laravel Framework
+│   ├── 📁 framework/                     # Laravel core (~50 subdirs)
+│   │   ├── 📁 src/                       # Source code
+│   │   │   ├── 📁 Illuminate/            # Main framework
+│   │   │   │   ├── 📁 Auth/              # Authentication
+│   │   │   │   ├── 📁 Broadcasting/      # Broadcasting
+│   │   │   │   ├── 📁 Bus/               # Command bus
+│   │   │   │   ├── 📁 Cache/             # Cache system
+│   │   │   │   ├── 📁 Collections/       # Collections
+│   │   │   │   ├── 📁 Config/            # Configuration
+│   │   │   │   ├── 📁 Console/           # Console commands
+│   │   │   │   ├── 📁 Container/         # Dependency injection
+│   │   │   │   ├── 📁 Contracts/         # Contracts interfaces
+│   │   │   │   ├── 📁 Cookie/            # Cookie handling
+│   │   │   │   ├── 📁 Database/          # Database (Eloquent)
+│   │   │   │   ├── 📁 Encryption/        # Encryption
+│   │   │   │   ├── 📁 Events/            # Event system
+│   │   │   │   ├── 📁 Filesystem/        # Filesystem
+│   │   │   │   ├── 📁 Hashing/           # Hashing (bcrypt, argon)
+│   │   │   │   ├── 📁 Http/              # HTTP layer
+│   │   │   │   ├── 📁 Log/               # Logging
+│   │   │   │   ├── 📁 Mail/              # Mail
+│   │   │   │   ├── 📁 Notifications/     # Notifications
+│   │   │   │   ├── 📁 Pagination/        # Pagination
+│   │   │   │   ├── 📁 Pipeline/          # Pipeline
+│   │   │   │   ├── 📁 Queue/             # Queue
+│   │   │   │   ├── 📁 Redis/             # Redis
+│   │   │   │   ├── 📁 Routing/           # Routing
+│   │   │   │   ├── 📁 Session/           # Session
+│   │   │   │   ├── 📁 Support/           # Support classes
+│   │   │   │   ├── 📁 Testing/           # Testing helpers
+│   │   │   │   ├── 📁 Translation/       # Translation
+│   │   │   │   ├── 📁 Validation/        # Validation
+│   │   │   │   └── 📁 View/              # View engine
+│   │   │   └── 📁 Illuminate/            # (continued)
+│   │   ├── 📄 LICENSE
+│   │   └── 📄 README.md
+│   └── 📁 horizon/                        # Laravel Horizon (queue monitoring)
+│
+├── 📁 tymon/                              # JWT Auth
+│   └── 📁 jwt-auth/                      # JWT authentication package
+│
+├── 📁 spatie/                             # Spatie packages
+│   ├── 📁 laravel-permission/            # Role & permission management
+│   ├── 📁 laravel-backup/                # Backup system
+│   ├── 📁 laravel-activitylog/           # Activity logging
+│   ├── 📁 laravel-medialibrary/          # Media management
+│   ├── 📁 laravel-query-builder/         # Query builder
+│   └── 📁 laravel-schedule-monitor/      # Schedule monitoring
+│
+├── 📁 barryvdh/                           # Barryvdh packages
+│   ├── 📁 laravel-dompdf/                # PDF generation (DOMPDF)
+│   └── 📁 laravel-ide-helper/            # IDE helper (dev)
+│
+├── 📁 maatwebsite/                        # Laravel Excel
+│   └── 📁 excel/                         # Excel import/export
+│
+├── 📁 phpoffice/                          # PHP Office
+│   ├── 📁 phpspreadsheet/                # Spreadsheet handling
+│   └── 📁 phpword/                       # Word document handling
+│
+├── 📁 phpseclib/                          # PHP Secure Communications Library
+│   └── 📁 phpseclib/                     # SSH, SFTP, X.509, etc.
+│
+├── 📁 guzzlehttp/                         # HTTP Client
+│   ├── 📁 guzzle/                        # Guzzle HTTP client
+│   ├── 📁 promises/                      # Promise handling
+│   └── 📁 psr7/                          # PSR-7 message interface
+│
+├── 📁 monolog/                            # Monolog - Logging
+│   └── 📁 monolog/                       # Logging library
+│
+├── 📁 phpmailer/                          # PHPMailer
+│   └── 📁 phpmailer/                     # Email sending
+│
+├── 📁 intervention/                       # Intervention Image
+│   └── 📁 image/                         # Image manipulation
+│
+├── 📁 firebase/                           # Firebase JWT
+│   └── 📁 php-jwt/                       # JWT handling
+│
+├── 📁 ramsey/                             # Ramsey UUID
+│   └── 📁 uuid/                          # UUID generation
+│
+├── 📁 doctrine/                           # Doctrine DBAL
+│   ├── 📁 dbal/                          # Database abstraction layer
+│   ├── 📁 cache/                         # Cache library
+│   ├── 📁 event-manager/                 # Event management
+│   └── 📁 inflector/                     # String inflector
+│
+├── 📁 nesbot/                             # Carbon
+│   └── 📁 carbon/                        # Date time library
+│
+├── 📁 pusher/                             # Pusher
+│   └── 📁 pusher-php-server/             # Pusher API client
+│
+├── 📁 beyondcode/                         # BeyondCode
+│   └── 📁 laravel-websockets/            # WebSocket server
+│
+├── 📁 laravel/                            # Laravel Socialite
+│   └── 📁 socialite/                     # OAuth authentication
+│
+├── 📁 socialiteproviders/                 # Socialite Providers
+│   ├── 📁 google/                        # Google OAuth
+│   └── 📁 github/                        # GitHub OAuth
+│
+├── 📁 cviebrock/                          # Eloquent Sluggable
+│   └── 📁 eloquent-sluggable/            # Slug generation
+│
+├── 📁 mews/                               # HTML Purifier
+│   └── 📁 purifier/                      # HTML sanitization
+│
+├── 📁 sentry/                             # Sentry SDK
+│   └── 📁 sentry-laravel/                # Error tracking
+│
+├── 📁 google/                             # Google Cloud
+│   └── 📁 cloud-translate/               # Google Translate API
+│
+├── 📁 fakerphp/                           # Faker (dev)
+│   └── 📁 faker/                         # Fake data generation
+│
+├── 📁 nunomaduro/                         # Nuno Maduro packages
+│   ├── 📁 collision/                     # Error rendering (dev)
+│   ├── 📁 phpinsights/                   # Code quality (dev)
+│   └── 📁 larastan/                      # PHPStan for Laravel (dev)
+│
+├── 📁 phpunit/                            # PHPUnit (dev)
+│   ├── 📁 phpunit/                       # Testing framework
+│   ├── 📁 php-code-coverage/             # Code coverage
+│   ├── 📁 php-timer/                     # Timing
+│   ├── 📁 php-file-iterator/             # File iteration
+│   └── 📁 php-text-template/             # Text templating
+│
+├── 📁 mockery/                            # Mockery (dev)
+│   └── 📁 mockery/                       # Mocking framework
+│
+├── 📁 pestphp/                            # Pest PHP (dev)
+│   ├── 📁 pest/                          # Testing framework
+│   ├── 📁 pest-plugin-laravel/           # Laravel plugin
+│   └── 📁 pest-plugin-faker/             # Faker plugin
+│
+├── 📁 phpbench/                           # PHPBench (dev)
+│   └── 📁 phpbench/                      # Benchmarking
+│
+├── 📁 roave/                              # Security Advisories (dev)
+│   └── 📁 security-advisories/           # Security checks
+│
+└── 📁 psr/                                # PSR Standards
+    ├── 📁 psr-3/                          # Logger interface
+    ├── 📁 psr-6/                          # Cache interface
+    ├── 📁 psr-7/                          # HTTP message interface
+    ├── 📁 psr-11/                         # Container interface
+    ├── 📁 psr-13/                         # Link interface
+    ├── 📁 psr-14/                         # Event manager
+    ├── 📁 psr-15/                         # HTTP handlers
+    ├── 📁 psr-16/                         # Simple cache
+    ├── 📁 psr-17/                         # HTTP factories
+    └── 📁 psr-18/                         # HTTP client
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 ║  🎨 FRONTEND/ - VUE.JS 3 (200+ files)
