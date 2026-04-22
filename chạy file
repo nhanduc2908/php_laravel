@@ -1,0 +1,424 @@
+# 🚀 THỨ TỰ CHẠY FILE & LỆNH CMD CHO VISUAL STUDIO (VS CODE)
+
+## 📋 SƠ ĐỒ THỨ TỰ CHẠY DỰ ÁN
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                         THỨ TỰ CHẠY DỰ ÁN TỪ ĐẦU ĐẾN CUỐI                          │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+
+BƯỚC 0: CÀI ĐẶT CÔNG CỤ (Chỉ 1 lần)
+    ├── Cài Node.js
+    ├── Cài Docker Desktop
+    ├── Cài Git
+    ├── Cài Composer
+    └── Cài VS Code + Extensions
+
+BƯỚC 1: MỞ VS CODE & CLONE DỰ ÁN
+    └── File → Open Folder → Chọn thư mục
+
+BƯỚC 2: CẤU HÌNH MÔI TRƯỜNG
+    ├── copy .env.example .env
+    └── Chỉnh sửa file .env
+
+BƯỚC 3: CÀI DEPENDENCIES
+    ├── composer install
+    ├── npm install (backend)
+    ├── npm install (frontend)
+    └── npm install (realtime)
+
+BƯỚC 4: KHỞI TẠO DATABASE
+    ├── docker-compose up -d
+    ├── php artisan migrate
+    └── php artisan db:seed
+
+BƯỚC 5: CHẠY ỨNG DỤNG
+    ├── php artisan serve (backend)
+    ├── npm run dev (frontend)
+    └── npm start (realtime)
+
+BƯỚC 6: TRUY CẬP & KIỂM TRA
+    ├── http://localhost:8080
+    └── http://localhost:3000
+```
+
+
+## 💻 LỆNH CMD CHI TIẾT CHO VS CODE
+
+### **Bước 0: Mở Terminal trong VS Code**
+```bash
+# Cách 1: Phím tắt
+Ctrl + `          # Mở terminal
+
+# Cách 2: Menu
+Terminal → New Terminal
+
+# Cách 3: Chuột phải
+Chuột phải vào thư mục → Open in Integrated Terminal
+```
+
+
+### **Bước 1: Di chuyển vào thư mục dự án**
+```bash
+# Xem thư mục hiện tại
+cd
+
+# Liệt kê file
+dir                    # Windows
+ls                     # Mac/Linux
+
+# Di chuyển vào thư mục dự án
+cd security-assessment-platform
+
+# Hoặc mở VS Code tại thư mục dự án
+code .
+```
+
+
+### **Bước 2: Cấu hình môi trường**
+```bash
+# Copy file .env mẫu
+copy .env.example .env        # Windows
+cp .env.example .env          # Mac/Linux
+
+# Mở file .env để chỉnh sửa
+notepad .env                  # Windows
+code .env                     # VS Code
+nano .env                     # Mac/Linux
+```
+
+
+### **Bước 3: Cài đặt Backend (PHP/Laravel)**
+```bash
+# Di chuyển vào thư mục backend
+cd backend
+
+# Cài Composer dependencies
+composer install
+
+# Tạo key cho Laravel
+php artisan key:generate
+
+# Tạo key cho JWT
+php artisan jwt:secret
+
+# Tạo symbolic link cho storage
+php artisan storage:link
+
+# Clear cache
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+
+# Quay lại thư mục gốc
+cd ..
+```
+
+
+### **Bước 4: Cài đặt Frontend (Vue.js)**
+```bash
+# Di chuyển vào thư mục frontend
+cd frontend
+
+# Cài NPM dependencies
+npm install
+
+# Hoặc dùng yarn
+yarn install
+
+# Cài thêm các package cần thiết
+npm install vue-router pinia axios
+npm install @vueuse/core
+npm install socket.io-client
+npm install chart.js
+
+# Quay lại thư mục gốc
+cd ..
+```
+
+
+### **Bước 5: Cài đặt Realtime Server (Node.js)**
+```bash
+# Di chuyển vào thư mục realtime
+cd realtime
+
+# Cài NPM dependencies
+npm install
+
+# Cài thêm package
+npm install socket.io redis
+npm install jsonwebtoken
+npm install dotenv
+
+# Quay lại thư mục gốc
+cd ..
+```
+
+
+### **Bước 6: Khởi động Database (Docker)**
+```bash
+# Kiểm tra Docker đã cài chưa
+docker --version
+docker-compose --version
+
+# Khởi động Docker Desktop (nếu chưa chạy)
+# Mở Docker Desktop từ Start Menu
+
+# Khởi động các container
+docker-compose up -d
+
+# Kiểm tra container đang chạy
+docker ps
+
+# Xem log
+docker-compose logs -f
+
+# Khởi động từng service riêng
+docker-compose up -d mysql
+docker-compose up -d redis
+docker-compose up -d nginx
+```
+
+
+### **Bước 7: Chạy Migration & Seeder**
+```bash
+# Di chuyển vào backend
+cd backend
+
+# Chạy migration
+php artisan migrate
+
+# Chạy migration fresh (xóa tất cả)
+php artisan migrate:fresh
+
+# Chạy seeder
+php artisan db:seed
+
+# Chạy seeder cụ thể
+php artisan db:seed --class=RoleSeeder
+php artisan db:seed --class=UserSeeder
+php artisan db:seed --class=CriteriaSeeder
+
+# Chạy migration và seeder cùng lúc
+php artisan migrate --seed
+
+# Quay lại thư mục gốc
+cd ..
+```
+
+
+### **Bước 8: Chạy Queue Worker (nếu cần)**
+```bash
+# Di chuyển vào backend
+cd backend
+
+# Chạy queue worker
+php artisan queue:work
+
+# Chạy queue listener
+php artisan queue:listen
+
+# Chạy queue trong background (Linux/Mac)
+php artisan queue:work &
+```
+
+
+### **Bước 9: Chạy Ứng dụng (Mở nhiều terminal)**
+```bash
+# ===== TERMINAL 1: Backend =====
+cd backend
+php artisan serve --port=8000
+# Hoặc dùng PHP built-in server
+php -S localhost:8000 -t public
+
+
+# ===== TERMINAL 2: Frontend =====
+# Mở terminal mới: Ctrl + Shift + 5
+cd frontend
+npm run dev
+# Hoặc build production
+npm run build
+
+
+# ===== TERMINAL 3: Realtime =====
+# Mở terminal mới: Ctrl + Shift + 5
+cd realtime
+npm start
+# Hoặc dùng nodemon (auto restart)
+npm run dev
+
+
+# ===== TERMINAL 4: Queue Worker (tùy chọn) =====
+# Mở terminal mới: Ctrl + Shift + 5
+cd backend
+php artisan queue:work
+```
+
+
+### **Bước 10: Truy cập ứng dụng**
+```bash
+# Mở trình duyệt
+start http://localhost:8000        # Windows
+open http://localhost:8000         # Mac
+
+# Backend API
+http://localhost:8000/api/v1
+
+# Frontend
+http://localhost:5173              # Vite dev server
+
+# Realtime WebSocket
+http://localhost:3000
+
+# PHPMyAdmin (nếu dùng Docker)
+http://localhost:8081
+
+# MailHog (nếu dùng Docker)
+http://localhost:8025
+```
+
+
+## 📋 TẤT CẢ LỆNH TRONG MỘT FILE (RUN.BAT)
+
+### **Tạo file run.bat trong thư mục gốc**
+```batch
+@echo off
+echo ========================================
+echo Security Assessment Platform
+echo ========================================
+
+:: Cấu hình môi trường
+echo [1/8] Copy .env file...
+copy .env.example .env
+
+:: Cài backend
+echo [2/8] Installing Backend...
+cd backend
+composer install
+php artisan key:generate
+php artisan jwt:secret
+cd ..
+
+:: Cài frontend
+echo [3/8] Installing Frontend...
+cd frontend
+npm install
+cd ..
+
+:: Cài realtime
+echo [4/8] Installing Realtime...
+cd realtime
+npm install
+cd ..
+
+:: Khởi động Docker
+echo [5/8] Starting Docker...
+docker-compose up -d
+
+:: Chạy migration
+echo [6/8] Running migrations...
+cd backend
+php artisan migrate --seed
+cd ..
+
+:: Khởi động backend
+echo [7/8] Starting Backend...
+start cmd /k "cd backend && php artisan serve"
+
+:: Khởi động frontend
+echo [8/8] Starting Frontend...
+start cmd /k "cd frontend && npm run dev"
+
+echo ========================================
+echo Done! Open http://localhost:8000
+echo ========================================
+pause
+```
+
+
+## 🛠️ VS CODE EXTENSIONS CẦN CÀI
+
+```bash
+# Mở VS Code, vào Extensions (Ctrl+Shift+X)
+# Cài các extension sau:
+
+1. Laravel Extension Pack
+2. Vue - Official
+3. Prettier - Code formatter
+4. ESLint
+5. Docker
+6. GitLens
+7. Thunder Client (API testing)
+8. MySQL (database viewer)
+9. DotENV
+10. Material Icon Theme
+```
+
+
+## ⚙️ CẤU HÌNH VS CODE LAUNCH.JSON (Debug)
+
+### **Tạo file .vscode/launch.json**
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Backend",
+            "type": "php",
+            "request": "launch",
+            "port": 9000,
+            "pathMappings": {
+                "/var/www/html": "${workspaceFolder}/backend"
+            }
+        },
+        {
+            "name": "Launch Frontend",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/frontend"
+        },
+        {
+            "name": "Launch Realtime",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/realtime",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch All",
+            "configurations": ["Launch Backend", "Launch Frontend", "Launch Realtime"]
+        }
+    ]
+}
+```
+
+
+## ✅ KIỂM TRA SAU KHI CHẠY
+
+```bash
+# Kiểm tra API health
+curl http://localhost:8000/api/v1/health
+
+# Kiểm tra database connection
+php artisan tinker
+>>> DB::connection()->getPdo();
+
+# Kiểm tra queue
+php artisan queue:failed
+
+# Kiểm tra log
+tail -f backend/storage/logs/laravel.log
+
+# Kiểm tra container Docker
+docker ps
+docker logs security-php
+docker logs security-nginx
+```
+
+---
+
+**🎉 HOÀN TẤT! DỰ ÁN ĐÃ SẴN SÀNG CHẠY TRÊN VS CODE!**
