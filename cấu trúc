@@ -1,290 +1,293 @@
 security-assessment-platform/
 │
-├── 📄 .env.example
-├── 📄 .gitignore
-├── 📄 docker-compose.yml
-├── 📄 docker-compose.dev.yml
-├── 📄 docker-compose.prod.yml
-├── 📄 Makefile
-├── 📄 README.md
-├── 📄 LICENSE
-├── 📄 phpunit.xml
-├── 📄 .eslintrc.js
-├── 📄 .prettierrc
+├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║  📁 ROOT - THƯ MỤC GỐC (11 file)
+╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+│
+├── 📄 .env.example                        # Mẫu biến môi trường (DB, JWT, Mail, Redis)
+├── 📄 .gitignore                          # File bỏ qua khi commit Git
+├── 📄 docker-compose.yml                  # Docker orchestration (nginx, php, mysql, redis)
+├── 📄 docker-compose.dev.yml              # Docker cho môi trường dev (Xdebug, hot-reload)
+├── 📄 docker-compose.prod.yml             # Docker cho production (optimized)
+├── 📄 Makefile                            # Tự động hóa lệnh (make install, make test)
+├── 📄 README.md                           # Tài liệu hướng dẫn dự án
+├── 📄 LICENSE                             # Giấy phép MIT
+├── 📄 phpunit.xml                         # Cấu hình PHPUnit testing
+├── 📄 .eslintrc.js                        # Cấu hình ESLint cho JavaScript
+└── 📄 .prettierrc                         # Cấu hình Prettier format code
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║  🚀 BACKEND/ - LARAVEL APPLICATION
+║  📁 BACKEND/ - LARAVEL (450+ files)
 ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 │
 ├── 📁 backend/
 │   │
-│   ├── 📄 .env
-│   ├── 📄 .env.example
-│   ├── 📄 .gitignore
-│   ├── 📄 artisan
-│   ├── 📄 composer.json
-│   ├── 📄 composer.lock
-│   ├── 📄 phpunit.xml
-│   ├── 📄 server.php
-│   ├── 📄 webpack.mix.js
+│   ├── 📄 .env                             # Biến môi trường local
+│   ├── 📄 .env.example                     # Mẫu biến môi trường
+│   ├── 📄 .gitignore                       # Git ignore cho backend
+│   ├── 📄 artisan                          # Laravel CLI tool
+│   ├── 📄 composer.json                    # PHP dependencies
+│   ├── 📄 composer.lock                    # Lock file Composer
+│   ├── 📄 phpunit.xml                      # PHPUnit config
+│   ├── 📄 server.php                       # Development server
+│   └── 📄 webpack.mix.js                   # Laravel Mix config
 │   │
-│   ├── 📁 app/
+│   ├── 📁 app/                             # ỨNG DỤNG CHÍNH
 │   │   │
-│   │   ├── 📁 Console/
-│   │   │   ├── 📄 Kernel.php
-│   │   │   └── 📁 Commands/
-│   │   │       ├── 📄 CreateAdminCommand.php
-│   │   │       ├── 📄 RunAssessmentCommand.php
-│   │   │       ├── 📄 GenerateReportCommand.php
-│   │   │       ├── 📄 BackupDatabaseCommand.php
-│   │   │       ├── 📄 CleanupLogsCommand.php
-│   │   │       ├── 📄 SyncServersCommand.php
-│   │   │       └── 📄 TestCommand.php
+│   │   ├── 📁 Console/                     # CLI Commands
+│   │   │   ├── 📄 Kernel.php               # Đăng ký commands
+│   │   │   └── 📁 Commands/                # Các command tùy chỉnh
+│   │   │       ├── 📄 CreateAdminCommand.php       # php artisan make:admin
+│   │   │       ├── 📄 RunAssessmentCommand.php     # php artisan assessment:run
+│   │   │       ├── 📄 GenerateReportCommand.php    # php artisan report:generate
+│   │   │       ├── 📄 BackupDatabaseCommand.php    # php artisan backup:run
+│   │   │       ├── 📄 CleanupLogsCommand.php       # php artisan logs:clean
+│   │   │       ├── 📄 SyncServersCommand.php       # php artisan servers:sync
+│   │   │       └── 📄 TestCommand.php              # php artisan test:run
 │   │   │
-│   │   ├── 📁 Exceptions/
-│   │   │   ├── 📄 Handler.php
-│   │   │   ├── 📄 ValidationException.php
-│   │   │   ├── 📄 AuthException.php
-│   │   │   ├── 📄 PermissionException.php
-│   │   │   ├── 📄 NotFoundException.php
-│   │   │   ├── 📄 DatabaseException.php
-│   │   │   ├── 📄 ScanException.php
-│   │   │   ├── 📄 BackupException.php
-│   │   │   ├── 📄 ApiException.php
-│   │   │   ├── 📄 TestException.php
-│   │   │   ├── 📄 FileException.php
-│   │   │   └── 📄 WrapperException.php
+│   │   ├── 📁 Exceptions/                  # Xử lý ngoại lệ
+│   │   │   ├── 📄 Handler.php              # Xử lý exception toàn cục
+│   │   │   ├── 📄 ValidationException.php  # Lỗi validation (400)
+│   │   │   ├── 📄 AuthException.php        # Lỗi xác thực (401)
+│   │   │   ├── 📄 PermissionException.php  # Lỗi phân quyền (403)
+│   │   │   ├── 📄 NotFoundException.php    # Lỗi 404
+│   │   │   ├── 📄 DatabaseException.php    # Lỗi database
+│   │   │   ├── 📄 ScanException.php        # Lỗi scan server
+│   │   │   ├── 📄 BackupException.php      # Lỗi backup
+│   │   │   ├── 📄 ApiException.php         # Lỗi API ngoài
+│   │   │   ├── 📄 TestException.php        # Lỗi test
+│   │   │   ├── 📄 FileException.php        # Lỗi file upload
+│   │   │   └── 📄 WrapperException.php     # Lỗi wrapper
 │   │   │
-│   │   ├── 📁 Http/
+│   │   ├── 📁 Http/                        # HTTP Layer
 │   │   │   │
-│   │   │   ├── 📁 Controllers/
-│   │   │   │   ├── 📄 Controller.php
-│   │   │   │   ├── 📄 AuthController.php
-│   │   │   │   ├── 📄 UserController.php
-│   │   │   │   ├── 📄 RoleController.php
-│   │   │   │   ├── 📄 ServerController.php
-│   │   │   │   ├── 📄 CategoryController.php
-│   │   │   │   ├── 📄 CriteriaController.php
-│   │   │   │   ├── 📄 AssessmentController.php
-│   │   │   │   ├── 📄 AssessmentFileController.php
-│   │   │   │   ├── 📄 DashboardController.php
-│   │   │   │   ├── 📄 VulnerabilityController.php
-│   │   │   │   ├── 📄 AlertController.php
-│   │   │   │   ├── 📄 ReportController.php
-│   │   │   │   ├── 📄 BackupController.php
-│   │   │   │   ├── 📄 ProfileController.php
-│   │   │   │   ├── 📄 AuditController.php
-│   │   │   │   ├── 📄 SettingController.php
-│   │   │   │   ├── 📄 DynamicMenuController.php
-│   │   │   │   └── 📄 TestingController.php
+│   │   │   ├── 📁 Controllers/             # Xử lý request (18 file)
+│   │   │   │   ├── 📄 Controller.php               # Base controller
+│   │   │   │   ├── 📄 AuthController.php           # login, logout, register, refresh
+│   │   │   │   ├── 📄 UserController.php           # CRUD users, assign role
+│   │   │   │   ├── 📄 RoleController.php           # CRUD roles, permissions
+│   │   │   │   ├── 📄 ServerController.php         # CRUD servers, test, scan
+│   │   │   │   ├── 📄 CategoryController.php       # 17 categories
+│   │   │   │   ├── 📄 CriteriaController.php       # 280 criteria, import/export
+│   │   │   │   ├── 📄 AssessmentController.php     # run assessment, get results
+│   │   │   │   ├── 📄 AssessmentFileController.php # CRUD files, share, version
+│   │   │   │   ├── 📄 DashboardController.php      # stats, charts, activities
+│   │   │   │   ├── 📄 VulnerabilityController.php  # CRUD vulnerabilities, CVE
+│   │   │   │   ├── 📄 AlertController.php          # CRUD alerts, mark read
+│   │   │   │   ├── 📄 ReportController.php         # generate, download PDF/Excel
+│   │   │   │   ├── 📄 BackupController.php         # create, restore backups
+│   │   │   │   ├── 📄 ProfileController.php        # view, update profile, 2FA
+│   │   │   │   ├── 📄 AuditController.php          # view audit logs
+│   │   │   │   ├── 📄 SettingController.php        # update system settings
+│   │   │   │   ├── 📄 DynamicMenuController.php    # get menu by role
+│   │   │   │   └── 📄 TestingController.php        # run tests, get results
 │   │   │   │
-│   │   │   ├── 📁 Middleware/
-│   │   │   │   ├── 📄 Authenticate.php
-│   │   │   │   ├── 📄 PermissionMiddleware.php
-│   │   │   │   ├── 📄 AssessmentFilePermissionMiddleware.php
-│   │   │   │   ├── 📄 RateLimitMiddleware.php
-│   │   │   │   ├── 📄 CorsMiddleware.php
-│   │   │   │   ├── 📄 SecurityHeadersMiddleware.php
-│   │   │   │   ├── 📄 LogMiddleware.php
-│   │   │   │   ├── 📄 CacheMiddleware.php
-│   │   │   │   ├── 📄 MaintenanceMiddleware.php
-│   │   │   │   ├── 📄 JsonMiddleware.php
-│   │   │   │   ├── 📄 CsrfMiddleware.php
-│   │   │   │   ├── 📄 WrapperMiddleware.php
-│   │   │   │   └── 📄 LanguageMiddleware.php
+│   │   │   ├── 📁 Middleware/               # Lọc request (13 file)
+│   │   │   │   ├── 📄 Authenticate.php              # Kiểm tra JWT token
+│   │   │   │   ├── 📄 PermissionMiddleware.php      # Kiểm tra quyền
+│   │   │   │   ├── 📄 AssessmentFilePermissionMiddleware.php # Quyền tệp
+│   │   │   │   ├── 📄 RateLimitMiddleware.php       # Giới hạn request/phút
+│   │   │   │   ├── 📄 CorsMiddleware.php            # Xử lý CORS
+│   │   │   │   ├── 📄 SecurityHeadersMiddleware.php # CSP, HSTS, XSS
+│   │   │   │   ├── 📄 LogMiddleware.php             # Ghi log request
+│   │   │   │   ├── 📄 CacheMiddleware.php           # Cache GET responses
+│   │   │   │   ├── 📄 MaintenanceMiddleware.php     # Chế độ bảo trì
+│   │   │   │   ├── 📄 JsonMiddleware.php            # Force JSON response
+│   │   │   │   ├── 📄 CsrfMiddleware.php            # Chống CSRF
+│   │   │   │   ├── 📄 WrapperMiddleware.php         # Wrapper pipeline
+│   │   │   │   └── 📄 LanguageMiddleware.php        # Set ngôn ngữ
 │   │   │   │
-│   │   │   ├── 📁 Requests/
-│   │   │   │   ├── 📄 LoginRequest.php
-│   │   │   │   ├── 📄 RegisterRequest.php
-│   │   │   │   ├── 📄 UserRequest.php
-│   │   │   │   ├── 📄 ServerRequest.php
-│   │   │   │   ├── 📄 CriteriaRequest.php
-│   │   │   │   ├── 📄 AssessmentRequest.php
-│   │   │   │   ├── 📄 AssessmentFileRequest.php
-│   │   │   │   ├── 📄 ReportRequest.php
-│   │   │   │   ├── 📄 BackupRequest.php
-│   │   │   │   ├── 📄 ProfileRequest.php
-│   │   │   │   ├── 📄 SettingRequest.php
-│   │   │   │   └── 📄 TestingRequest.php
+│   │   │   ├── 📁 Requests/                 # Validation rules (12 file)
+│   │   │   │   ├── 📄 LoginRequest.php             # email, password required
+│   │   │   │   ├── 📄 RegisterRequest.php          # name, email, password
+│   │   │   │   ├── 📄 UserRequest.php              # name, email, role_id
+│   │   │   │   ├── 📄 ServerRequest.php            # name, host, port, username
+│   │   │   │   ├── 📄 CriteriaRequest.php          # code, name, weight
+│   │   │   │   ├── 📄 AssessmentRequest.php        # server_id, answers
+│   │   │   │   ├── 📄 AssessmentFileRequest.php    # title, content, server_id
+│   │   │   │   ├── 📄 ReportRequest.php            # type, format, filters
+│   │   │   │   ├── 📄 BackupRequest.php            # type, database, files
+│   │   │   │   ├── 📄 ProfileRequest.php           # name, email, avatar
+│   │   │   │   ├── 📄 SettingRequest.php           # key, value, group
+│   │   │   │   └── 📄 TestingRequest.php           # suite, environment
 │   │   │   │
-│   │   │   └── 📄 Kernel.php
+│   │   │   └── 📄 Kernel.php                # Đăng ký middleware groups
 │   │   │
-│   │   ├── 📁 Models/
-│   │   │   ├── 📄 User.php
-│   │   │   ├── 📄 Role.php
-│   │   │   ├── 📄 Permission.php
-│   │   │   ├── 📄 Server.php
-│   │   │   ├── 📄 Category.php
-│   │   │   ├── 📄 Criteria.php
-│   │   │   ├── 📄 AssessmentResult.php
-│   │   │   ├── 📄 AssessmentReport.php
-│   │   │   ├── 📄 AssessmentFile.php
-│   │   │   ├── 📄 AssessmentFileShare.php
-│   │   │   ├── 📄 AssessmentFileVersion.php
-│   │   │   ├── 📄 Vulnerability.php
-│   │   │   ├── 📄 VulnerabilityHistory.php
-│   │   │   ├── 📄 Alert.php
-│   │   │   ├── 📄 AlertNote.php
-│   │   │   ├── 📄 AuditLog.php
-│   │   │   ├── 📄 Backup.php
-│   │   │   ├── 📄 Setting.php
-│   │   │   ├── 📄 Session.php
-│   │   │   ├── 📄 Token.php
-│   │   │   ├── 📄 Notification.php
-│   │   │   ├── 📄 TestResult.php
-│   │   │   └── 📄 TestSuite.php
+│   │   ├── 📁 Models/                       # Database Models (23 file)
+│   │   │   ├── 📄 User.php                  # id, name, email, password, role_id, 2fa_secret
+│   │   │   ├── 📄 Role.php                  # id, name, slug, description, level
+│   │   │   ├── 📄 Permission.php            # id, name, slug, resource, action
+│   │   │   ├── 📄 Server.php                # id, name, host, port, username, ssh_key
+│   │   │   ├── 📄 Category.php              # id, name, code, parent_id, order
+│   │   │   ├── 📄 Criteria.php              # id, category_id, code, name, weight
+│   │   │   ├── 📄 AssessmentResult.php      # id, server_id, criteria_id, score
+│   │   │   ├── 📄 AssessmentReport.php      # id, server_id, total_score, compliance
+│   │   │   ├── 📄 AssessmentFile.php        # id, title, content, server_id, version
+│   │   │   ├── 📄 AssessmentFileShare.php   # id, file_id, shared_with, permission
+│   │   │   ├── 📄 AssessmentFileVersion.php # id, file_id, version, content
+│   │   │   ├── 📄 Vulnerability.php         # id, server_id, cve, severity, fix
+│   │   │   ├── 📄 VulnerabilityHistory.php  # id, vulnerability_id, status
+│   │   │   ├── 📄 Alert.php                 # id, type, severity, message
+│   │   │   ├── 📄 AlertNote.php             # id, alert_id, note
+│   │   │   ├── 📄 AuditLog.php              # id, user_id, action, ip
+│   │   │   ├── 📄 Backup.php                # id, filename, size, status
+│   │   │   ├── 📄 Setting.php               # id, key, value, group
+│   │   │   ├── 📄 Session.php               # id, user_id, token, expires_at
+│   │   │   ├── 📄 Token.php                 # id, user_id, refresh_token
+│   │   │   ├── 📄 Notification.php          # id, user_id, type, data
+│   │   │   ├── 📄 TestResult.php            # id, test_suite, status, duration
+│   │   │   └── 📄 TestSuite.php             # id, name, tests_count
 │   │   │
-│   │   ├── 📁 Providers/
-│   │   │   ├── 📄 AppServiceProvider.php
-│   │   │   ├── 📄 AuthServiceProvider.php
-│   │   │   ├── 📄 EventServiceProvider.php
-│   │   │   ├── 📄 RouteServiceProvider.php
-│   │   │   ├── 📄 RepositoryServiceProvider.php
-│   │   │   ├── 📄 WrapperServiceProvider.php
-│   │   │   └── 📄 LanguageServiceProvider.php
+│   │   ├── 📁 Providers/                   # Service Providers (7 file)
+│   │   │   ├── 📄 AppServiceProvider.php        # Đăng ký app services
+│   │   │   ├── 📄 AuthServiceProvider.php       # Đăng ký auth services
+│   │   │   ├── 📄 EventServiceProvider.php      # Đăng ký events/listeners
+│   │   │   ├── 📄 RouteServiceProvider.php      # Đăng ký routes
+│   │   │   ├── 📄 RepositoryServiceProvider.php # Đăng ký repositories
+│   │   │   ├── 📄 WrapperServiceProvider.php    # Đăng ký wrappers
+│   │   │   └── 📄 LanguageServiceProvider.php   # Đăng ký language
 │   │   │
-│   │   ├── 📁 Services/
-│   │   │   ├── 📄 AuthService.php
-│   │   │   ├── 📄 ScannerService.php
-│   │   │   ├── 📄 ScoreCalculatorService.php
-│   │   │   ├── 📄 AttackDetectorService.php
-│   │   │   ├── 📄 SshConnectionService.php
-│   │   │   ├── 📄 ApiCallService.php
-│   │   │   ├── 📄 FileUploadService.php
-│   │   │   ├── 📄 AssessmentFileService.php
-│   │   │   ├── 📄 BackupService.php
-│   │   │   ├── 📄 RealtimeService.php
-│   │   │   ├── 📄 ReportGeneratorService.php
-│   │   │   ├── 📄 NotificationService.php
-│   │   │   ├── 📄 ImportExportService.php
-│   │   │   ├── 📄 TestRunnerService.php
-│   │   │   ├── 📄 WrapperService.php
-│   │   │   └── 📄 LanguageService.php
+│   │   ├── 📁 Services/                    # Business Logic (16 file)
+│   │   │   ├── 📄 AuthService.php               # login, logout, token generation
+│   │   │   ├── 📄 ScannerService.php            # scan server, run commands
+│   │   │   ├── 📄 ScoreCalculatorService.php    # calculate compliance score
+│   │   │   ├── 📄 AttackDetectorService.php     # detect brute force, DDoS
+│   │   │   ├── 📄 SshConnectionService.php      # SSH connection, execute
+│   │   │   ├── 📄 ApiCallService.php            # call external APIs
+│   │   │   ├── 📄 FileUploadService.php         # upload, validate, store
+│   │   │   ├── 📄 AssessmentFileService.php     # CRUD files, share, version
+│   │   │   ├── 📄 BackupService.php             # backup, restore database
+│   │   │   ├── 📄 RealtimeService.php           # push events via WebSocket
+│   │   │   ├── 📄 ReportGeneratorService.php    # generate PDF, Excel
+│   │   │   ├── 📄 NotificationService.php       # send email, SMS, push
+│   │   │   ├── 📄 ImportExportService.php       # import/export Excel
+│   │   │   ├── 📄 TestRunnerService.php         # run test suites
+│   │   │   ├── 📄 WrapperService.php            # manage wrappers
+│   │   │   └── 📄 LanguageService.php           # translation, i18n
 │   │   │
-│   │   ├── 📁 Repositories/
-│   │   │   ├── 📄 UserRepository.php
-│   │   │   ├── 📄 ServerRepository.php
-│   │   │   ├── 📄 CriteriaRepository.php
-│   │   │   ├── 📄 AssessmentRepository.php
-│   │   │   ├── 📄 AssessmentFileRepository.php
-│   │   │   ├── 📄 AlertRepository.php
-│   │   │   ├── 📄 ReportRepository.php
-│   │   │   ├── 📄 TestRepository.php
-│   │   │   ├── 📄 BaseRepository.php
-│   │   │   └── 📄 LanguageRepository.php
+│   │   ├── 📁 Repositories/                 # Data Access (10 file)
+│   │   │   ├── 📄 UserRepository.php             # findByEmail, getByRole
+│   │   │   ├── 📄 ServerRepository.php           # getByStatus, getActive
+│   │   │   ├── 📄 CriteriaRepository.php         # getByCategory, search
+│   │   │   ├── 📄 AssessmentRepository.php       # getHistory, getScore
+│   │   │   ├── 📄 AssessmentFileRepository.php   # getByServer, getByUser
+│   │   │   ├── 📄 AlertRepository.php            # getUnread, getBySeverity
+│   │   │   ├── 📄 ReportRepository.php           # getByUser, getByDate
+│   │   │   ├── 📄 TestRepository.php             # getResults, getCoverage
+│   │   │   ├── 📄 BaseRepository.php             # base CRUD operations
+│   │   │   └── 📄 LanguageRepository.php         # getTranslations
 │   │   │
-│   │   ├── 📁 Jobs/
-│   │   │   ├── 📄 ScanServerJob.php
-│   │   │   ├── 📄 SendEmailJob.php
-│   │   │   ├── 📄 GenerateReportJob.php
-│   │   │   ├── 📄 BackupDatabaseJob.php
-│   │   │   ├── 📄 CleanupLogsJob.php
-│   │   │   ├── 📄 SyncServersJob.php
-│   │   │   ├── 📄 CheckVulnerabilitiesJob.php
-│   │   │   ├── 📄 SendAlertJob.php
-│   │   │   ├── 📄 RunTestSuiteJob.php
-│   │   │   ├── 📄 CleanExpiredSharesJob.php
-│   │   │   ├── 📄 BaseJob.php
-│   │   │   └── 📄 TranslateJob.php
+│   │   ├── 📁 Jobs/                         # Queue Jobs (12 file)
+│   │   │   ├── 📄 ScanServerJob.php              # scan server in background
+│   │   │   ├── 📄 SendEmailJob.php               # send email async
+│   │   │   ├── 📄 GenerateReportJob.php          # generate report async
+│   │   │   ├── 📄 BackupDatabaseJob.php          # backup database async
+│   │   │   ├── 📄 CleanupLogsJob.php             # clean old logs
+│   │   │   ├── 📄 SyncServersJob.php             # sync servers from external
+│   │   │   ├── 📄 CheckVulnerabilitiesJob.php    # check new CVEs
+│   │   │   ├── 📄 SendAlertJob.php               # send alerts
+│   │   │   ├── 📄 RunTestSuiteJob.php            # run test suite
+│   │   │   ├── 📄 CleanExpiredSharesJob.php      # remove expired shares
+│   │   │   ├── 📄 BaseJob.php                    # base job class
+│   │   │   └── 📄 TranslateJob.php               # translate content
 │   │   │
-│   │   ├── 📁 Listeners/
-│   │   │   ├── 📄 SendLoginNotification.php
-│   │   │   ├── 📄 LogUserAction.php
-│   │   │   ├── 📄 CreateAuditTrail.php
-│   │   │   ├── 📄 SendAlertOnVulnerability.php
-│   │   │   ├── 📄 UpdateDashboardCache.php
-│   │   │   ├── 📄 PushRealtimeEvent.php
-│   │   │   ├── 📄 NotifyFileShared.php
-│   │   │   ├── 📄 BaseListener.php
-│   │   │   └── 📄 LanguageListener.php
+│   │   ├── 📁 Listeners/                    # Event Listeners (9 file)
+│   │   │   ├── 📄 SendLoginNotification.php      # email on login
+│   │   │   ├── 📄 LogUserAction.php              # log user actions
+│   │   │   ├── 📄 CreateAuditTrail.php           # create audit trail
+│   │   │   ├── 📄 SendAlertOnVulnerability.php   # alert on new vulnerability
+│   │   │   ├── 📄 UpdateDashboardCache.php       # update dashboard cache
+│   │   │   ├── 📄 PushRealtimeEvent.php          # push realtime event
+│   │   │   ├── 📄 NotifyFileShared.php           # notify when file shared
+│   │   │   ├── 📄 BaseListener.php               # base listener class
+│   │   │   └── 📄 LanguageListener.php           # handle language changes
 │   │   │
-│   │   └── 📁 Wrappers/
-│   │       ├── 📄 AppWrapper.php
-│   │       ├── 📄 ConfigWrapper.php
-│   │       ├── 📄 ServiceWrapper.php
-│   │       ├── 📄 EnvironmentWrapper.php
-│   │       ├── 📄 ModuleWrapper.php
-│   │       ├── 📄 LanguageWrapper.php
-│   │       ├── 📄 RequestWrapper.php
-│   │       ├── 📄 ValidationWrapper.php
-│   │       ├── 📄 SanitizeWrapper.php
-│   │       ├── 📄 FileWrapper.php
-│   │       ├── 📄 InputWrapper.php
-│   │       ├── 📄 ResponseWrapper.php
-│   │       ├── 📄 JsonWrapper.php
-│   │       ├── 📄 ApiWrapper.php
-│   │       ├── 📄 ErrorWrapper.php
-│   │       ├── 📄 DownloadWrapper.php
-│   │       ├── 📄 ConnectionWrapper.php
-│   │       ├── 📄 QueryWrapper.php
-│   │       ├── 📄 TransactionWrapper.php
-│   │       ├── 📄 ModelWrapper.php
-│   │       ├── 📄 PaginationWrapper.php
-│   │       ├── 📄 SchemaWrapper.php
-│   │       ├── 📄 CacheWrapper.php
-│   │       ├── 📄 RedisWrapper.php
-│   │       ├── 📄 FileCacheWrapper.php
-│   │       ├── 📄 MemoryWrapper.php
-│   │       ├── 📄 TagWrapper.php
-│   │       ├── 📄 AuthWrapper.php
-│   │       ├── 📄 PermissionWrapper.php
-│   │       ├── 📄 CryptoWrapper.php
-│   │       ├── 📄 JwtWrapper.php
-│   │       ├── 📄 CsrfWrapper.php
-│   │       ├── 📄 LogWrapper.php
-│   │       ├── 📄 FileLogWrapper.php
-│   │       ├── 📄 DatabaseLogWrapper.php
-│   │       ├── 📄 AuditWrapper.php
-│   │       ├── 📄 QueueWrapper.php
-│   │       ├── 📄 JobWrapper.php
-│   │       ├── 📄 WorkerWrapper.php
-│   │       ├── 📄 FailedWrapper.php
-│   │       ├── 📄 EventWrapper.php
-│   │       ├── 📄 ListenerWrapper.php
-│   │       ├── 📄 SubscriberWrapper.php
-│   │       ├── 📄 MailWrapper.php
-│   │       ├── 📄 MimeWrapper.php
-│   │       └── 📄 AttachmentWrapper.php
+│   │   └── 📁 Wrappers/                     # Wrapper Classes (50+ file)
+│   │       ├── 📄 AppWrapper.php                # app lifecycle management
+│   │       ├── 📄 ConfigWrapper.php             # config loading/access
+│   │       ├── 📄 ServiceWrapper.php            # dependency injection
+│   │       ├── 📄 EnvironmentWrapper.php        # environment variables
+│   │       ├── 📄 ModuleWrapper.php             # module management
+│   │       ├── 📄 LanguageWrapper.php           # i18n management
+│   │       ├── 📄 RequestWrapper.php            # HTTP request parsing
+│   │       ├── 📄 ValidationWrapper.php         # data validation
+│   │       ├── 📄 SanitizeWrapper.php           # input sanitization
+│   │       ├── 📄 FileWrapper.php               # file handling
+│   │       ├── 📄 ResponseWrapper.php           # HTTP response
+│   │       ├── 📄 JsonWrapper.php               # JSON response
+│   │       ├── 📄 ApiWrapper.php                # API response format
+│   │       ├── 📄 ErrorWrapper.php              # error handling
+│   │       ├── 📄 DownloadWrapper.php           # file download
+│   │       ├── 📄 ConnectionWrapper.php         # database connection
+│   │       ├── 📄 QueryWrapper.php              # query builder
+│   │       ├── 📄 TransactionWrapper.php        # database transaction
+│   │       ├── 📄 ModelWrapper.php              # base model
+│   │       ├── 📄 PaginationWrapper.php         # pagination
+│   │       ├── 📄 SchemaWrapper.php             # schema builder
+│   │       ├── 📄 CacheWrapper.php              # cache interface
+│   │       ├── 📄 RedisWrapper.php              # Redis driver
+│   │       ├── 📄 FileCacheWrapper.php          # file cache
+│   │       ├── 📄 MemoryWrapper.php             # memory cache
+│   │       ├── 📄 TagWrapper.php                # cache tags
+│   │       ├── 📄 AuthWrapper.php               # authentication
+│   │       ├── 📄 PermissionWrapper.php         # authorization
+│   │       ├── 📄 CryptoWrapper.php             # encryption
+│   │       ├── 📄 JwtWrapper.php                # JWT token
+│   │       ├── 📄 CsrfWrapper.php               # CSRF protection
+│   │       ├── 📄 LogWrapper.php                # logging interface
+│   │       ├── 📄 FileLogWrapper.php            # file logger
+│   │       ├── 📄 DatabaseLogWrapper.php        # database logger
+│   │       ├── 📄 AuditWrapper.php              # audit logging
+│   │       ├── 📄 QueueWrapper.php              # queue interface
+│   │       ├── 📄 JobWrapper.php                # job handling
+│   │       ├── 📄 WorkerWrapper.php             # queue worker
+│   │       ├── 📄 FailedWrapper.php             # failed jobs
+│   │       ├── 📄 EventWrapper.php              # event dispatcher
+│   │       ├── 📄 ListenerWrapper.php           # event listener
+│   │       ├── 📄 SubscriberWrapper.php         # event subscriber
+│   │       ├── 📄 MailWrapper.php               # mail sending
+│   │       ├── 📄 MimeWrapper.php               # MIME types
+│   │       └── 📄 AttachmentWrapper.php         # email attachments
 │   │
-│   ├── 📁 bootstrap/
-│   │   ├── 📄 app.php
-│   │   ├── 📄 cache/
-│   │   └── 📄 routes.php
+│   ├── 📁 bootstrap/                       # Khởi tạo
+│   │   ├── 📄 app.php                      # Khởi tạo app container
+│   │   ├── 📄 cache/                       # Cache folder
+│   │   └── 📄 routes.php                   # Đăng ký routes
 │   │
-│   ├── 📁 config/
-│   │   ├── 📄 app.php
-│   │   ├── 📄 auth.php
-│   │   ├── 📄 broadcast.php
-│   │   ├── 📄 cache.php
-│   │   ├── 📄 cors.php
-│   │   ├── 📄 database.php
-│   │   ├── 📄 filesystems.php
-│   │   ├── 📄 hashing.php
-│   │   ├── 📄 jwt.php
-│   │   ├── 📄 logging.php
-│   │   ├── 📄 mail.php
-│   │   ├── 📄 queue.php
-│   │   ├── 📄 rbac.php
-│   │   ├── 📄 services.php
-│   │   ├── 📄 session.php
-│   │   ├── 📄 view.php
-│   │   ├── 📄 criteria_categories.php
-│   │   ├── 📄 criteria_280.php
-│   │   ├── 📄 menu.php
-│   │   ├── 📄 testing.php
-│   │   ├── 📄 assessment-files.php
-│   │   ├── 📄 wrapper.php
-│   │   ├── 📄 lang.php
-│   │   └── 📄 localization.php
+│   ├── 📁 config/                         # Cấu hình (24 file)
+│   │   ├── 📄 app.php                     # APP_NAME, APP_ENV, APP_DEBUG, APP_URL
+│   │   ├── 📄 auth.php                    # Authentication guards, providers
+│   │   ├── 📄 broadcast.php               # Broadcasting drivers
+│   │   ├── 📄 cache.php                   # Cache stores, TTL
+│   │   ├── 📄 cors.php                    # CORS paths, allowed origins
+│   │   ├── 📄 database.php                # MySQL, Redis connections
+│   │   ├── 📄 filesystems.php             # Storage disks (local, s3)
+│   │   ├── 📄 hashing.php                 # Hashing drivers (bcrypt, argon)
+│   │   ├── 📄 jwt.php                     # JWT secret, TTL, refresh TTL
+│   │   ├── 📄 logging.php                 # Log channels, levels
+│   │   ├── 📄 mail.php                    # SMTP config, mailers
+│   │   ├── 📄 queue.php                   # Queue drivers, connections
+│   │   ├── 📄 rbac.php                    # Roles, permissions mapping
+│   │   ├── 📄 services.php                # External services (CVE API)
+│   │   ├── 📄 session.php                 # Session drivers, lifetime
+│   │   ├── 📄 view.php                    # View paths, compiled paths
+│   │   ├── 📄 criteria_categories.php     # 17 categories definition
+│   │   ├── 📄 criteria_280.php            # 280 criteria definition
+│   │   ├── 📄 menu.php                    # Menu structure by role
+│   │   ├── 📄 testing.php                 # Test configuration
+│   │   ├── 📄 assessment-files.php        # File upload config
+│   │   ├── 📄 wrapper.php                 # Wrapper configuration
+│   │   ├── 📄 lang.php                    # Supported languages
+│   │   └── 📄 localization.php            # Locale settings
 │   │
-│   ├── 📁 database/
-│   │   ├── 📁 factories/
+│   ├── 📁 database/                       # Database (60+ file)
+│   │   ├── 📁 factories/                 # Model factories (5 file)
 │   │   │   ├── 📄 UserFactory.php
 │   │   │   ├── 📄 RoleFactory.php
 │   │   │   ├── 📄 ServerFactory.php
 │   │   │   ├── 📄 CriteriaFactory.php
 │   │   │   └── 📄 AssessmentFileFactory.php
-│   │   ├── 📁 migrations/
+│   │   ├── 📁 migrations/                # Migrations (46 file)
 │   │   │   ├── 📄 2014_10_12_000000_create_users_table.php
 │   │   │   ├── 📄 2014_10_12_100000_create_password_resets_table.php
 │   │   │   ├── 📄 2019_08_19_000000_create_failed_jobs_table.php
@@ -336,88 +339,63 @@ security-assessment-platform/
 │   │   │   ├── 📄 2024_01_20_000004_add_test_indexes_table.php
 │   │   │   ├── 📄 2024_01_20_000005_add_assessment_file_indexes_table.php
 │   │   │   └── 📄 2024_01_20_000006_add_language_indexes_table.php
-│   │   │
-│   │   └── 📁 seeders/
-│   │       ├── 📄 DatabaseSeeder.php
-│   │       ├── 📄 RoleSeeder.php
-│   │       ├── 📄 PermissionSeeder.php
-│   │       ├── 📄 CategorySeeder.php
-│   │       ├── 📄 CriteriaSeeder.php
-│   │       ├── 📄 UserSeeder.php
-│   │       ├── 📄 ServerSeeder.php
-│   │       ├── 📄 AssessmentFileSeeder.php
-│   │       ├── 📄 TestDataSeeder.php
-│   │       ├── 📄 MenuSeeder.php
-│   │       ├── 📄 WrapperSeeder.php
-│   │       ├── 📄 LanguageSeeder.php
-│   │       └── 📄 TestSeeder.php
+│   │   └── 📁 seeders/                   # Seeders (13 file)
+│   │       ├── 📄 DatabaseSeeder.php           # Main seeder
+│   │       ├── 📄 RoleSeeder.php               # Seed 5 roles
+│   │       ├── 📄 PermissionSeeder.php         # Seed permissions
+│   │       ├── 📄 CategorySeeder.php           # Seed 17 categories
+│   │       ├── 📄 CriteriaSeeder.php           # Seed 280 criteria
+│   │       ├── 📄 UserSeeder.php               # Seed default users
+│   │       ├── 📄 ServerSeeder.php             # Seed demo servers
+│   │       ├── 📄 AssessmentFileSeeder.php     # Seed files
+│   │       ├── 📄 TestDataSeeder.php           # Seed test data
+│   │       ├── 📄 MenuSeeder.php               # Seed menu
+│   │       ├── 📄 WrapperSeeder.php            # Seed wrapper config
+│   │       ├── 📄 LanguageSeeder.php           # Seed translations
+│   │       └── 📄 TestSeeder.php               # Seed test data
 │   │
-│   ├── 📁 lang/
-│   │   ├── 📁 en/
-│   │   │   ├── 📄 auth.php
-│   │   │   ├── 📄 validation.php
-│   │   │   ├── 📄 criteria.php
-│   │   │   ├── 📄 messages.php
-│   │   │   ├── 📄 testing.php
-│   │   │   ├── 📄 wrapper.php
-│   │   │   ├── 📄 assessment-files.php
-│   │   │   ├── 📄 server.php
-│   │   │   ├── 📄 dashboard.php
-│   │   │   ├── 📄 report.php
-│   │   │   ├── 📄 vulnerability.php
-│   │   │   └── 📄 alert.php
-│   │   ├── 📁 vi/
-│   │   │   ├── 📄 auth.php
-│   │   │   ├── 📄 validation.php
-│   │   │   ├── 📄 criteria.php
-│   │   │   ├── 📄 messages.php
-│   │   │   ├── 📄 testing.php
-│   │   │   ├── 📄 wrapper.php
-│   │   │   ├── 📄 assessment-files.php
-│   │   │   ├── 📄 server.php
-│   │   │   ├── 📄 dashboard.php
-│   │   │   ├── 📄 report.php
-│   │   │   ├── 📄 vulnerability.php
-│   │   │   └── 📄 alert.php
-│   │   └── 📁 ja/
-│   │       ├── 📄 auth.php
-│   │       ├── 📄 validation.php
-│   │       ├── 📄 criteria.php
-│   │       ├── 📄 messages.php
-│   │       ├── 📄 testing.php
-│   │       ├── 📄 wrapper.php
-│   │       ├── 📄 assessment-files.php
-│   │       ├── 📄 server.php
-│   │       ├── 📄 dashboard.php
-│   │       ├── 📄 report.php
-│   │       ├── 📄 vulnerability.php
-│   │       └── 📄 alert.php
+│   ├── 📁 lang/                          # Ngôn ngữ (36 file - 3 languages)
+│   │   ├── 📁 en/                        # English (12 file)
+│   │   │   ├── 📄 auth.php               # login_success, login_failed, logout
+│   │   │   ├── 📄 validation.php         # required, email, min, max, unique
+│   │   │   ├── 📄 criteria.php           # category names, criteria labels
+│   │   │   ├── 📄 messages.php           # success, error, warning, info
+│   │   │   ├── 📄 testing.php            # test passed, failed, running
+│   │   │   ├── 📄 wrapper.php            # wrapper errors
+│   │   │   ├── 📄 assessment-files.php   # file upload, share, version
+│   │   │   ├── 📄 server.php             # server connection, scan
+│   │   │   ├── 📄 dashboard.php          # dashboard widgets
+│   │   │   ├── 📄 report.php             # report generation
+│   │   │   ├── 📄 vulnerability.php      # CVE, severity, fix
+│   │   │   └── 📄 alert.php              # alert types, severities
+│   │   ├── 📁 vi/                        # Tiếng Việt (12 file)
+│   │   └── 📁 ja/                        # 日本語 (12 file)
 │   │
-│   ├── 📁 public/
-│   │   ├── 📄 .htaccess
-│   │   ├── 📄 index.php
-│   │   ├── 📄 robots.txt
-│   │   ├── 📄 favicon.ico
+│   ├── 📁 public/                        # Public directory
+│   │   ├── 📄 .htaccess                  # Apache config
+│   │   ├── 📄 index.php                  # Front controller
+│   │   ├── 📄 robots.txt                 # SEO
+│   │   ├── 📄 favicon.ico                # Favicon
 │   │   └── 📁 assets/
 │   │       ├── 📁 css/
 │   │       ├── 📁 js/
 │   │       └── 📁 images/
 │   │
-│   ├── 📁 resources/
+│   ├── 📁 resources/                     # Resources
 │   │   ├── 📁 lang/
-│   │   ├── 📁 views/
-│   │   │   ├── 📁 layouts/
+│   │   ├── 📁 views/                     # Blade templates (55+ file)
+│   │   │   ├── 📁 layouts/              # Layout templates
 │   │   │   │   ├── 📄 app.blade.php
 │   │   │   │   ├── 📄 header.blade.php
 │   │   │   │   ├── 📄 sidebar.blade.php
 │   │   │   │   └── 📄 footer.blade.php
-│   │   │   ├── 📁 auth/
+│   │   │   ├── 📁 auth/                 # Authentication pages
 │   │   │   │   ├── 📄 login.blade.php
 │   │   │   │   ├── 📄 register.blade.php
 │   │   │   │   ├── 📄 forgot-password.blade.php
 │   │   │   │   ├── 📄 reset-password.blade.php
 │   │   │   │   └── 📄 two-factor.blade.php
-│   │   │   ├── 📁 super-admin/
+│   │   │   ├── 📁 super-admin/          # Super Admin pages
 │   │   │   │   ├── 📄 dashboard.blade.php
 │   │   │   │   ├── 📄 users.blade.php
 │   │   │   │   ├── 📄 roles.blade.php
@@ -436,38 +414,11 @@ security-assessment-platform/
 │   │   │   │       ├── 📄 index.blade.php
 │   │   │   │       ├── 📄 runner.blade.php
 │   │   │   │       └── 📄 results.blade.php
-│   │   │   ├── 📁 admin/
-│   │   │   │   ├── 📄 dashboard.blade.php
-│   │   │   │   ├── 📄 users.blade.php
-│   │   │   │   ├── 📄 roles.blade.php
-│   │   │   │   ├── 📄 servers.blade.php
-│   │   │   │   ├── 📄 criteria.blade.php
-│   │   │   │   ├── 📄 assessments.blade.php
-│   │   │   │   ├── 📄 assessment-files.blade.php
-│   │   │   │   ├── 📄 vulnerabilities.blade.php
-│   │   │   │   ├── 📄 alerts.blade.php
-│   │   │   │   ├── 📄 reports.blade.php
-│   │   │   │   ├── 📄 backup.blade.php
-│   │   │   │   └── 📄 settings.blade.php
-│   │   │   ├── 📁 security-officer/
-│   │   │   │   ├── 📄 dashboard.blade.php
-│   │   │   │   ├── 📄 servers.blade.php
-│   │   │   │   ├── 📄 assessments.blade.php
-│   │   │   │   ├── 📄 assessment-files.blade.php
-│   │   │   │   ├── 📄 vulnerabilities.blade.php
-│   │   │   │   ├── 📄 alerts.blade.php
-│   │   │   │   └── 📄 reports.blade.php
-│   │   │   ├── 📁 viewer/
-│   │   │   │   ├── 📄 dashboard.blade.php
-│   │   │   │   ├── 📄 reports.blade.php
-│   │   │   │   ├── 📄 compliance-status.blade.php
-│   │   │   │   └── 📄 server-list.blade.php
-│   │   │   ├── 📁 auditor/
-│   │   │   │   ├── 📄 dashboard.blade.php
-│   │   │   │   ├── 📄 audit-logs.blade.php
-│   │   │   │   ├── 📄 user-activities.blade.php
-│   │   │   │   └── 📄 reports.blade.php
-│   │   │   └── 📁 common/
+│   │   │   ├── 📁 admin/                # Admin pages
+│   │   │   ├── 📁 security-officer/     # Security Officer pages
+│   │   │   ├── 📁 viewer/               # Viewer pages
+│   │   │   ├── 📁 auditor/              # Auditor pages
+│   │   │   └── 📁 common/               # Common pages
 │   │   │       ├── 📄 404.blade.php
 │   │   │       ├── 📄 403.blade.php
 │   │   │       ├── 📄 500.blade.php
@@ -476,14 +427,14 @@ security-assessment-platform/
 │   │       ├── 📄 app.js
 │   │       └── 📄 bootstrap.js
 │   │
-│   ├── 📁 routes/
-│   │   ├── 📄 api.php
-│   │   ├── 📄 web.php
-│   │   ├── 📄 channels.php
-│   │   └── 📄 console.php
+│   ├── 📁 routes/                        # Routing (4 file)
+│   │   ├── 📄 api.php                    # API routes (/api/v1/*)
+│   │   ├── 📄 web.php                    # Web routes (/, /login, /dashboard)
+│   │   ├── 📄 channels.php               # WebSocket channels
+│   │   └── 📄 console.php                # CLI routes
 │   │
-│   ├── 📁 storage/
-│   │   ├── 📁 app/
+│   ├── 📁 storage/                       # Storage
+│   │   ├── 📁 app/                       # Application files
 │   │   │   ├── 📁 public/
 │   │   │   └── 📁 uploads/
 │   │   │       ├── 📁 evidence/
@@ -494,12 +445,12 @@ security-assessment-platform/
 │   │   │           ├── 📁 documents/
 │   │   │           ├── 📁 attachments/
 │   │   │           └── 📁 versions/
-│   │   ├── 📁 framework/
+│   │   ├── 📁 framework/                 # Framework cache
 │   │   │   ├── 📁 cache/
 │   │   │   ├── 📁 sessions/
 │   │   │   ├── 📁 testing/
 │   │   │   └── 📁 views/
-│   │   └── 📁 logs/
+│   │   └── 📁 logs/                      # Log files (11 file)
 │   │       ├── 📄 laravel.log
 │   │       ├── 📄 auth.log
 │   │       ├── 📄 scan.log
@@ -512,10 +463,10 @@ security-assessment-platform/
 │   │       ├── 📄 wrapper.log
 │   │       └── 📄 language.log
 │   │
-│   ├── 📁 tests/
-│   │   ├── 📄 TestCase.php
-│   │   ├── 📄 CreatesApplication.php
-│   │   ├── 📁 Unit/
+│   ├── 📁 tests/                         # Tests (85+ file)
+│   │   ├── 📄 TestCase.php               # Base test case
+│   │   ├── 📄 CreatesApplication.php     # Create app for testing
+│   │   ├── 📁 Unit/                      # Unit tests (12 file)
 │   │   │   ├── 📄 AuthTest.php
 │   │   │   ├── 📄 RBACTest.php
 │   │   │   ├── 📄 CriteriaTest.php
@@ -528,7 +479,7 @@ security-assessment-platform/
 │   │   │   ├── 📄 AssessmentFileTest.php
 │   │   │   ├── 📄 WrapperTest.php
 │   │   │   └── 📄 LanguageTest.php
-│   │   ├── 📁 Feature/
+│   │   ├── 📁 Feature/                   # Feature tests (12 file)
 │   │   │   ├── 📄 ApiAuthTest.php
 │   │   │   ├── 📄 ApiCriteriaTest.php
 │   │   │   ├── 📄 ApiAssessmentTest.php
@@ -541,7 +492,7 @@ security-assessment-platform/
 │   │   │   ├── 📄 ApiBackupTest.php
 │   │   │   ├── 📄 ApiDashboardTest.php
 │   │   │   └── 📄 ApiLanguageTest.php
-│   │   ├── 📁 Integration/
+│   │   ├── 📁 Integration/               # Integration tests (7 file)
 │   │   │   ├── 📄 DatabaseTest.php
 │   │   │   ├── 📄 QueueTest.php
 │   │   │   ├── 📄 CacheTest.php
@@ -549,107 +500,107 @@ security-assessment-platform/
 │   │   │   ├── 📄 MiddlewareTest.php
 │   │   │   ├── 📄 RouterTest.php
 │   │   │   └── 📄 WrapperIntegrationTest.php
-│   │   ├── 📁 Performance/
+│   │   ├── 📁 Performance/               # Performance tests (5 file)
 │   │   │   ├── 📄 LoadTest.php
 │   │   │   ├── 📄 StressTest.php
 │   │   │   ├── 📄 ConcurrencyTest.php
 │   │   │   ├── 📄 DatabasePerformanceTest.php
 │   │   │   └── 📄 ApiPerformanceTest.php
-│   │   ├── 📁 Security/
+│   │   ├── 📁 Security/                  # Security tests (6 file)
 │   │   │   ├── 📄 SqlInjectionTest.php
 │   │   │   ├── 📄 XssTest.php
 │   │   │   ├── 📄 CsrfTest.php
 │   │   │   ├── 📄 RateLimitTest.php
 │   │   │   ├── 📄 AuthenticationTest.php
 │   │   │   └── 📄 AuthorizationTest.php
-│   │   ├── 📁 Browser/
+│   │   ├── 📁 Browser/                   # Browser tests (5 file)
 │   │   │   ├── 📄 LoginTest.php
 │   │   │   ├── 📄 DashboardTest.php
 │   │   │   ├── 📄 CriteriaUITest.php
 │   │   │   ├── 📄 AssessmentUITest.php
 │   │   │   └── 📄 ResponsiveTest.php
-│   │   ├── 📁 API/
+│   │   ├── 📁 API/                       # API contract tests (5 file)
 │   │   │   ├── 📄 ContractTest.php
 │   │   │   ├── 📄 SchemaTest.php
 │   │   │   ├── 📄 VersioningTest.php
 │   │   │   ├── 📄 DocumentationTest.php
 │   │   │   └── 📄 LanguageApiTest.php
-│   │   ├── 📁 Database/
+│   │   ├── 📁 Database/                  # Database tests (6 file)
 │   │   │   ├── 📄 MigrationTest.php
 │   │   │   ├── 📄 SeederTest.php
 │   │   │   ├── 📄 QueryTest.php
 │   │   │   ├── 📄 TransactionTest.php
 │   │   │   ├── 📄 RelationshipTest.php
 │   │   │   └── 📄 ModelTest.php
-│   │   ├── 📁 Mock/
+│   │   ├── 📁 Mock/                      # Mock tests (4 file)
 │   │   │   ├── 📄 ServiceMockTest.php
 │   │   │   ├── 📄 RepositoryMockTest.php
 │   │   │   ├── 📄 ExternalApiMockTest.php
 │   │   │   └── 📄 DatabaseMockTest.php
-│   │   ├── 📁 Regression/
+│   │   ├── 📁 Regression/                # Regression tests (3 file)
 │   │   │   ├── 📄 BugFixesTest.php
 │   │   │   ├── 📄 OldFeaturesTest.php
 │   │   │   └── 📄 CompatibilityTest.php
-│   │   ├── 📁 Acceptance/
+│   │   ├── 📁 Acceptance/                # Acceptance tests (3 file)
 │   │   │   ├── 📄 UserStoryTest.php
 │   │   │   ├── 📄 WorkflowTest.php
 │   │   │   └── 📄 BusinessLogicTest.php
-│   │   └── 📁 E2E/
+│   │   └── 📁 E2E/                       # End-to-End tests (5 file)
 │   │       ├── 📄 FullAssessmentFlowTest.php
 │   │       ├── 📄 UserManagementFlowTest.php
 │   │       ├── 📄 ReportGenerationFlowTest.php
 │   │       ├── 📄 BackupRestoreFlowTest.php
 │   │       └── 📄 AssessmentFileFlowTest.php
 │   │
-│   └── 📁 vendor/
+│   └── 📁 vendor/                        # Composer dependencies
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║  🎨 FRONTEND/ - VUE.JS 3 APPLICATION
+║  🎨 FRONTEND/ - VUE.JS 3 (200+ files)
 ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 │
 ├── 📁 frontend/
 │   │
-│   ├── 📄 .env
-│   ├── 📄 .env.example
-│   ├── 📄 .gitignore
-│   ├── 📄 index.html
-│   ├── 📄 package.json
-│   ├── 📄 package-lock.json
-│   ├── 📄 vite.config.js
-│   ├── 📄 README.md
+│   ├── 📄 .env                              # Biến môi trường frontend
+│   ├── 📄 .env.example                      # Mẫu biến môi trường
+│   ├── 📄 .gitignore                        # Git ignore cho frontend
+│   ├── 📄 index.html                        # HTML entry point
+│   ├── 📄 package.json                      # NPM dependencies
+│   ├── 📄 package-lock.json                 # Lock file NPM
+│   ├── 📄 vite.config.js                    # Vite config
+│   └── 📄 README.md                         # Frontend docs
 │   │
-│   ├── 📁 public/
+│   ├── 📁 public/                           # Public assets
 │   │   ├── 📄 favicon.ico
 │   │   └── 📁 assets/
 │   │
-│   ├── 📁 src/
+│   ├── 📁 src/                              # Source code
 │   │   │
-│   │   ├── 📄 main.js
-│   │   ├── 📄 App.vue
+│   │   ├── 📄 main.js                       # App entry, mount Vue
+│   │   ├── 📄 App.vue                       # Root component
 │   │   │
-│   │   ├── 📁 api/
-│   │   │   ├── 📄 client.js
-│   │   │   ├── 📄 auth.js
-│   │   │   ├── 📄 users.js
-│   │   │   ├── 📄 roles.js
-│   │   │   ├── 📄 servers.js
-│   │   │   ├── 📄 categories.js
-│   │   │   ├── 📄 criteria.js
-│   │   │   ├── 📄 assessments.js
-│   │   │   ├── 📄 assessment-files.js
-│   │   │   ├── 📄 dashboard.js
-│   │   │   ├── 📄 vulnerabilities.js
-│   │   │   ├── 📄 alerts.js
-│   │   │   ├── 📄 reports.js
-│   │   │   ├── 📄 backup.js
-│   │   │   ├── 📄 profile.js
-│   │   │   ├── 📄 audit.js
-│   │   │   ├── 📄 settings.js
-│   │   │   ├── 📄 menu.js
-│   │   │   └── 📄 testing.js
+│   │   ├── 📁 api/                          # API calls (18 file)
+│   │   │   ├── 📄 client.js                 # Axios instance
+│   │   │   ├── 📄 auth.js                   # login, logout, register
+│   │   │   ├── 📄 users.js                  # CRUD users
+│   │   │   ├── 📄 roles.js                  # CRUD roles
+│   │   │   ├── 📄 servers.js                # CRUD servers
+│   │   │   ├── 📄 categories.js             # get categories
+│   │   │   ├── 📄 criteria.js               # CRUD criteria
+│   │   │   ├── 📄 assessments.js            # run assessment, get results
+│   │   │   ├── 📄 assessment-files.js       # CRUD files, share
+│   │   │   ├── 📄 dashboard.js              # get stats, charts
+│   │   │   ├── 📄 vulnerabilities.js        # CRUD vulnerabilities
+│   │   │   ├── 📄 alerts.js                 # CRUD alerts
+│   │   │   ├── 📄 reports.js                # generate, download
+│   │   │   ├── 📄 backup.js                 # create, restore
+│   │   │   ├── 📄 profile.js                # update profile
+│   │   │   ├── 📄 audit.js                  # get logs
+│   │   │   ├── 📄 settings.js               # update settings
+│   │   │   ├── 📄 menu.js                   # get menu by role
+│   │   │   └── 📄 testing.js                # run tests
 │   │   │
-│   │   ├── 📁 assets/
-│   │   │   ├── 📁 css/
+│   │   ├── 📁 assets/                       # Static assets
+│   │   │   ├── 📁 css/                      # Stylesheets (10 file)
 │   │   │   │   ├── 📄 main.css
 │   │   │   │   ├── 📄 admin.css
 │   │   │   │   ├── 📄 dashboard.css
@@ -660,13 +611,13 @@ security-assessment-platform/
 │   │   │   │   ├── 📄 sidebar.css
 │   │   │   │   ├── 📄 testing.css
 │   │   │   │   └── 📄 components.css
-│   │   │   ├── 📁 images/
-│   │   │   │   ├── 📁 logo/
+│   │   │   ├── 📁 images/                   # Images
+│   │   │   │   ├── 📁 logo/                 # Logo files
 │   │   │   │   │   ├── 📄 logo.png
 │   │   │   │   │   ├── 📄 logo-white.png
 │   │   │   │   │   ├── 📄 logo-dark.png
 │   │   │   │   │   └── 📄 favicon.ico
-│   │   │   │   ├── 📁 icons/
+│   │   │   │   ├── 📁 icons/                # Icons
 │   │   │   │   │   ├── 📄 critical.svg
 │   │   │   │   │   ├── 📄 high.svg
 │   │   │   │   │   ├── 📄 medium.svg
@@ -678,7 +629,7 @@ security-assessment-platform/
 │   │   │   │   │   ├── 📄 test-pass.svg
 │   │   │   │   │   ├── 📄 test-fail.svg
 │   │   │   │   │   └── 📄 test-running.svg
-│   │   │   │   ├── 📁 file-types/
+│   │   │   │   ├── 📁 file-types/           # File type icons
 │   │   │   │   │   ├── 📄 pdf.svg
 │   │   │   │   │   ├── 📄 doc.svg
 │   │   │   │   │   ├── 📄 xls.svg
@@ -686,22 +637,22 @@ security-assessment-platform/
 │   │   │   │   │   ├── 📄 img.svg
 │   │   │   │   │   ├── 📄 zip.svg
 │   │   │   │   │   └── 📄 txt.svg
-│   │   │   │   ├── 📁 flags/
+│   │   │   │   ├── 📁 flags/                # Language flags
 │   │   │   │   │   ├── 📄 en.svg
 │   │   │   │   │   ├── 📄 vi.svg
 │   │   │   │   │   └── 📄 ja.svg
 │   │   │   │   └── 📄 loading.gif
-│   │   │   └── 📁 fonts/
+│   │   │   └── 📁 fonts/                    # Font files
 │   │   │
-│   │   ├── 📁 components/
+│   │   ├── 📁 components/                   # Vue components (70+ file)
 │   │   │   │
-│   │   │   ├── 📁 layout/
-│   │   │   │   ├── 📄 AppHeader.vue
-│   │   │   │   ├── 📄 AppSidebar.vue
-│   │   │   │   ├── 📄 AppFooter.vue
-│   │   │   │   └── 📄 AppMain.vue
+│   │   │   ├── 📁 layout/                   # Layout components (4 file)
+│   │   │   │   ├── 📄 AppHeader.vue         # Header with toggle button
+│   │   │   │   ├── 📄 AppSidebar.vue        # Sidebar (collapsible)
+│   │   │   │   ├── 📄 AppFooter.vue         # Footer
+│   │   │   │   └── 📄 AppMain.vue           # Main content
 │   │   │   │
-│   │   │   ├── 📁 common/
+│   │   │   ├── 📁 common/                   # Common components (11 file)
 │   │   │   │   ├── 📄 LoadingSpinner.vue
 │   │   │   │   ├── 📄 ErrorAlert.vue
 │   │   │   │   ├── 📄 SuccessToast.vue
@@ -714,7 +665,7 @@ security-assessment-platform/
 │   │   │   │   ├── 📄 LanguageSwitcher.vue
 │   │   │   │   └── 📄 ThemeToggle.vue
 │   │   │   │
-│   │   │   ├── 📁 dashboard/
+│   │   │   ├── 📁 dashboard/                # Dashboard components (7 file)
 │   │   │   │   ├── 📄 StatsCard.vue
 │   │   │   │   ├── 📄 ChartLine.vue
 │   │   │   │   ├── 📄 ChartBar.vue
@@ -723,37 +674,37 @@ security-assessment-platform/
 │   │   │   │   ├── 📄 TopVulnerabilities.vue
 │   │   │   │   └── 📄 ComplianceGauge.vue
 │   │   │   │
-│   │   │   ├── 📁 users/
+│   │   │   ├── 📁 users/                    # User components (4 file)
 │   │   │   │   ├── 📄 UserTable.vue
 │   │   │   │   ├── 📄 UserForm.vue
 │   │   │   │   ├── 📄 RoleSelector.vue
 │   │   │   │   └── 📄 PermissionMatrix.vue
 │   │   │   │
-│   │   │   ├── 📁 servers/
+│   │   │   ├── 📁 servers/                  # Server components (5 file)
 │   │   │   │   ├── 📄 ServerTable.vue
 │   │   │   │   ├── 📄 ServerForm.vue
 │   │   │   │   ├── 📄 ServerStatus.vue
 │   │   │   │   ├── 📄 ScanProgress.vue
 │   │   │   │   └── 📄 VulnerabilityList.vue
 │   │   │   │
-│   │   │   ├── 📁 categories/
+│   │   │   ├── 📁 categories/               # Category components (2 file)
 │   │   │   │   ├── 📄 CategoryTree.vue
 │   │   │   │   └── 📄 CategoryCard.vue
 │   │   │   │
-│   │   │   ├── 📁 criteria/
+│   │   │   ├── 📁 criteria/                 # Criteria components (4 file)
 │   │   │   │   ├── 📄 CriteriaTable.vue
 │   │   │   │   ├── 📄 CriteriaForm.vue
 │   │   │   │   ├── 📄 CriteriaFilter.vue
 │   │   │   │   └── 📄 WeightSlider.vue
 │   │   │   │
-│   │   │   ├── 📁 assessments/
+│   │   │   ├── 📁 assessments/              # Assessment components (5 file)
 │   │   │   │   ├── 📄 AssessmentForm.vue
 │   │   │   │   ├── 📄 QuestionList.vue
 │   │   │   │   ├── 📄 ScoreDisplay.vue
 │   │   │   │   ├── 📄 ComplianceChart.vue
 │   │   │   │   └── 📄 HistoryTable.vue
 │   │   │   │
-│   │   │   ├── 📁 assessment-files/
+│   │   │   ├── 📁 assessment-files/         # File components (8 file)
 │   │   │   │   ├── 📄 FileList.vue
 │   │   │   │   ├── 📄 FileCard.vue
 │   │   │   │   ├── 📄 FileForm.vue
@@ -763,60 +714,60 @@ security-assessment-platform/
 │   │   │   │   ├── 📄 VersionHistory.vue
 │   │   │   │   └── 📄 UploadZone.vue
 │   │   │   │
-│   │   │   ├── 📁 vulnerabilities/
+│   │   │   ├── 📁 vulnerabilities/          # Vulnerability components (4 file)
 │   │   │   │   ├── 📄 VulnerabilityTable.vue
 │   │   │   │   ├── 📄 SeverityBadge.vue
 │   │   │   │   ├── 📄 CVEDetail.vue
 │   │   │   │   └── 📄 FixSuggestion.vue
 │   │   │   │
-│   │   │   ├── 📁 alerts/
+│   │   │   ├── 📁 alerts/                   # Alert components (3 file)
 │   │   │   │   ├── 📄 AlertList.vue
 │   │   │   │   ├── 📄 AlertBadge.vue
 │   │   │   │   └── 📄 NotificationToast.vue
 │   │   │   │
-│   │   │   ├── 📁 reports/
+│   │   │   ├── 📁 reports/                  # Report components (4 file)
 │   │   │   │   ├── 📄 ReportForm.vue
 │   │   │   │   ├── 📄 ReportTemplate.vue
 │   │   │   │   ├── 📄 ExportOptions.vue
 │   │   │   │   └── 📄 ScheduleForm.vue
 │   │   │   │
-│   │   │   ├── 📁 backup/
+│   │   │   ├── 📁 backup/                   # Backup components (3 file)
 │   │   │   │   ├── 📄 BackupTable.vue
 │   │   │   │   ├── 📄 BackupForm.vue
 │   │   │   │   └── 📄 RestoreConfirm.vue
 │   │   │   │
-│   │   │   ├── 📁 audit/
+│   │   │   ├── 📁 audit/                    # Audit components (3 file)
 │   │   │   │   ├── 📄 LogTable.vue
 │   │   │   │   ├── 📄 LogFilter.vue
 │   │   │   │   └── 📄 LogDetail.vue
 │   │   │   │
-│   │   │   ├── 📁 settings/
+│   │   │   ├── 📁 settings/                 # Settings components (3 file)
 │   │   │   │   ├── 📄 SettingsForm.vue
 │   │   │   │   ├── 📄 SettingsTab.vue
 │   │   │   │   └── 📄 EnvironmentInfo.vue
 │   │   │   │
-│   │   │   ├── 📁 profile/
+│   │   │   ├── 📁 profile/                  # Profile components (4 file)
 │   │   │   │   ├── 📄 ProfileForm.vue
 │   │   │   │   ├── 📄 AvatarUpload.vue
 │   │   │   │   ├── 📄 TwoFactorSetup.vue
 │   │   │   │   └── 📄 SessionList.vue
 │   │   │   │
-│   │   │   └── 📁 testing/
+│   │   │   └── 📁 testing/                  # Testing components (4 file)
 │   │   │       ├── 📄 TestRunner.vue
 │   │   │       ├── 📄 TestResults.vue
 │   │   │       ├── 📄 CoverageReport.vue
 │   │   │       └── 📄 TestChart.vue
 │   │   │
-│   │   ├── 📁 views/
+│   │   ├── 📁 views/                        # Page views (35+ file)
 │   │   │   │
-│   │   │   ├── 📁 auth/
+│   │   │   ├── 📁 auth/                     # Auth pages (5 file)
 │   │   │   │   ├── 📄 Login.vue
 │   │   │   │   ├── 📄 Register.vue
 │   │   │   │   ├── 📄 ForgotPassword.vue
 │   │   │   │   ├── 📄 ResetPassword.vue
 │   │   │   │   └── 📄 TwoFactor.vue
 │   │   │   │
-│   │   │   ├── 📁 super-admin/
+│   │   │   ├── 📁 super-admin/              # Super Admin pages (15 file)
 │   │   │   │   ├── 📄 Dashboard.vue
 │   │   │   │   ├── 📄 Users.vue
 │   │   │   │   ├── 📄 Roles.vue
@@ -836,156 +787,156 @@ security-assessment-platform/
 │   │   │   │       ├── 📄 Runner.vue
 │   │   │   │       └── 📄 Results.vue
 │   │   │   │
-│   │   │   ├── 📁 admin/
-│   │   │   │   ├── 📄 Dashboard.vue
-│   │   │   │   ├── 📄 Users.vue
-│   │   │   │   ├── 📄 Roles.vue
-│   │   │   │   ├── 📄 Servers.vue
-│   │   │   │   ├── 📄 Criteria.vue
-│   │   │   │   ├── 📄 Assessments.vue
-│   │   │   │   ├── 📄 AssessmentFiles.vue
-│   │   │   │   ├── 📄 Vulnerabilities.vue
-│   │   │   │   ├── 📄 Alerts.vue
-│   │   │   │   ├── 📄 Reports.vue
-│   │   │   │   ├── 📄 Backup.vue
-│   │   │   │   └── 📄 Settings.vue
-│   │   │   │
-│   │   │   ├── 📁 security-officer/
-│   │   │   │   ├── 📄 Dashboard.vue
-│   │   │   │   ├── 📄 Servers.vue
-│   │   │   │   ├── 📄 Assessments.vue
-│   │   │   │   ├── 📄 AssessmentFiles.vue
-│   │   │   │   ├── 📄 Vulnerabilities.vue
-│   │   │   │   ├── 📄 Alerts.vue
-│   │   │   │   └── 📄 Reports.vue
-│   │   │   │
-│   │   │   ├── 📁 viewer/
-│   │   │   │   ├── 📄 Dashboard.vue
-│   │   │   │   ├── 📄 Reports.vue
-│   │   │   │   ├── 📄 ComplianceStatus.vue
-│   │   │   │   └── 📄 ServerList.vue
-│   │   │   │
-│   │   │   ├── 📁 auditor/
-│   │   │   │   ├── 📄 Dashboard.vue
-│   │   │   │   ├── 📄 AuditLogs.vue
-│   │   │   │   ├── 📄 UserActivities.vue
-│   │   │   │   └── 📄 Reports.vue
-│   │   │   │
-│   │   │   └── 📁 common/
+
+├── 📁 admin/                                 # Admin pages (12 files)
+│   ├── 📄 Dashboard.vue
+│   ├── 📄 Users.vue
+│   ├── 📄 Roles.vue
+│   ├── 📄 Servers.vue
+│   ├── 📄 Criteria.vue
+│   ├── 📄 Assessments.vue
+│   ├── 📄 AssessmentFiles.vue
+│   ├── 📄 Vulnerabilities.vue
+│   ├── 📄 Alerts.vue
+│   ├── 📄 Reports.vue
+│   ├── 📄 Backup.vue
+│   └── 📄 Settings.vue
+│
+├── 📁 security-officer/                      # Security Officer pages (7 files)
+│   ├── 📄 Dashboard.vue
+│   ├── 📄 Servers.vue
+│   ├── 📄 Assessments.vue
+│   ├── 📄 AssessmentFiles.vue
+│   ├── 📄 Vulnerabilities.vue
+│   ├── 📄 Alerts.vue
+│   └── 📄 Reports.vue
+│
+├── 📁 viewer/                                # Viewer pages (4 files)
+│   ├── 📄 Dashboard.vue
+│   ├── 📄 Reports.vue
+│   ├── 📄 ComplianceStatus.vue
+│   └── 📄 ServerList.vue
+│
+└── 📁 auditor/                               # Auditor pages (4 files)
+    ├── 📄 Dashboard.vue
+    ├── 📄 AuditLogs.vue
+    ├── 📄 UserActivities.vue
+    └── 📄 Reports.vue
+│   │   │   └── 📁 common/                  # Common pages (4 file)
 │   │   │       ├── 📄 NotFound.vue
 │   │   │       ├── 📄 Forbidden.vue
 │   │   │       ├── 📄 ServerError.vue
 │   │   │       └── 📄 Maintenance.vue
 │   │   │
-│   │   ├── 📁 router/
-│   │   │   └── 📄 index.js
+│   │   ├── 📁 router/                       # Routing
+│   │   │   └── 📄 index.js                  # Vue Router config + guards
 │   │   │
-│   │   ├── 📁 stores/
-│   │   │   ├── 📄 auth.js
-│   │   │   ├── 📄 sidebar.js
-│   │   │   ├── 📄 theme.js
-│   │   │   ├── 📄 user.js
-│   │   │   ├── 📄 server.js
-│   │   │   ├── 📄 criteria.js
-│   │   │   ├── 📄 assessment.js
-│   │   │   ├── 📄 alert.js
-│   │   │   ├── 📄 notification.js
-│   │   │   └── 📄 language.js
+│   │   ├── 📁 stores/                       # Pinia stores (10 file)
+│   │   │   ├── 📄 auth.js                   # Auth state (user, token)
+│   │   │   ├── 📄 sidebar.js                # Sidebar state (collapsed, hidden)
+│   │   │   ├── 📄 theme.js                  # Dark/light mode
+│   │   │   ├── 📄 user.js                   # User management
+│   │   │   ├── 📄 server.js                 # Server management
+│   │   │   ├── 📄 criteria.js               # Criteria management
+│   │   │   ├── 📄 assessment.js             # Assessment state
+│   │   │   ├── 📄 alert.js                  # Alert state
+│   │   │   ├── 📄 notification.js           # Notification state
+│   │   │   └── 📄 language.js               # Language state
 │   │   │
-│   │   ├── 📁 composables/
-│   │   │   ├── 📄 useAuth.js
-│   │   │   ├── 📄 usePermission.js
-│   │   │   ├── 📄 useSidebar.js
-│   │   │   ├── 📄 useApi.js
-│   │   │   ├── 📄 useToast.js
-│   │   │   ├── 📄 useModal.js
-│   │   │   ├── 📄 useTable.js
-│   │   │   ├── 📄 useWebSocket.js
-│   │   │   └── 📄 useI18n.js
+│   │   ├── 📁 composables/                  # Composables (9 file)
+│   │   │   ├── 📄 useAuth.js                # Auth logic
+│   │   │   ├── 📄 usePermission.js          # Permission check
+│   │   │   ├── 📄 useSidebar.js             # Sidebar logic
+│   │   │   ├── 📄 useApi.js                 # API calls
+│   │   │   ├── 📄 useToast.js               # Toast notifications
+│   │   │   ├── 📄 useModal.js               # Modal handling
+│   │   │   ├── 📄 useTable.js               # Table pagination
+│   │   │   ├── 📄 useWebSocket.js           # WebSocket connection
+│   │   │   └── 📄 useI18n.js                # Internationalization
 │   │   │
-│   │   ├── 📁 utils/
-│   │   │   ├── 📄 constants.js
-│   │   │   ├── 📄 helpers.js
-│   │   │   ├── 📄 formatters.js
-│   │   │   ├── 📄 validators.js
-│   │   │   ├── 📄 i18n.js
-│   │   │   └── 📄 socket.js
+│   │   ├── 📁 utils/                        # Utilities (6 file)
+│   │   │   ├── 📄 constants.js              # Constants
+│   │   │   ├── 📄 helpers.js                # Helper functions
+│   │   │   ├── 📄 formatters.js             # Date, number formatting
+│   │   │   ├── 📄 validators.js             # Validation rules
+│   │   │   ├── 📄 i18n.js                   # Internationalization
+│   │   │   └── 📄 socket.js                 # WebSocket client
 │   │   │
-│   │   └── 📁 plugins/
-│   │       ├── 📄 i18n.js
-│   │       └── 📄 socket.js
+│   │   └── 📁 plugins/                      # Plugins (2 file)
+│   │       ├── 📄 i18n.js                   # Vue I18n
+│   │       └── 📄 socket.js                 # Socket.io plugin
 │   │
-│   └── 📁 node_modules/
+│   └── 📁 node_modules/                     # NPM dependencies
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║  ⚡ REALTIME/ - WEBSOCKET SERVER
+║  ⚡ REALTIME/ - WEBSOCKET SERVER (20+ files)
 ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 │
 ├── 📁 realtime/
 │   │
-│   ├── 📄 .env
-│   ├── 📄 .env.example
-│   ├── 📄 .gitignore
-│   ├── 📄 server.js
-│   ├── 📄 package.json
-│   ├── 📄 package-lock.json
-│   ├── 📄 ecosystem.config.js
-│   ├── 📄 README.md
+│   ├── 📄 .env                              # Biến môi trường
+│   ├── 📄 .env.example                      # Mẫu biến môi trường
+│   ├── 📄 .gitignore                        # Git ignore
+│   ├── 📄 server.js                         # WebSocket server entry
+│   ├── 📄 package.json                      # Node dependencies
+│   ├── 📄 package-lock.json                 # Lock file
+│   ├── 📄 ecosystem.config.js               # PM2 config
+│   └── 📄 README.md                         # Realtime docs
 │   │
-│   ├── 📁 src/
-│   │   ├── 📄 index.js
-│   │   ├── 📄 app.js
+│   ├── 📁 src/                              # Source code
+│   │   ├── 📄 index.js                      # Entry point
+│   │   ├── 📄 app.js                        # App setup
 │   │   │
-│   │   ├── 📁 config/
-│   │   │   ├── 📄 database.js
-│   │   │   ├── 📄 redis.js
-│   │   │   └── 📄 socket.js
+│   │   ├── 📁 config/                       # Configuration (3 file)
+│   │   │   ├── 📄 database.js               # DB connection
+│   │   │   ├── 📄 redis.js                  # Redis config
+│   │   │   └── 📄 socket.js                 # Socket.IO config
 │   │   │
-│   │   ├── 📁 middleware/
-│   │   │   ├── 📄 auth.js
-│   │   │   ├── 📄 rateLimit.js
-│   │   │   └── 📄 logger.js
+│   │   ├── 📁 middleware/                   # Middleware (3 file)
+│   │   │   ├── 📄 auth.js                   # Socket auth
+│   │   │   ├── 📄 rateLimit.js              # Rate limiting
+│   │   │   └── 📄 logger.js                 # Logging
 │   │   │
-│   │   ├── 📁 handlers/
-│   │   │   ├── 📄 connection.js
-│   │   │   ├── 📄 auth.js
-│   │   │   ├── 📄 alert.js
-│   │   │   ├── 📄 scan.js
-│   │   │   ├── 📄 assessment.js
-│   │   │   ├── 📄 metric.js
-│   │   │   ├── 📄 notification.js
-│   │   │   └── 📄 file.js
+│   │   ├── 📁 handlers/                     # Event handlers (8 file)
+│   │   │   ├── 📄 connection.js             # Connection handler
+│   │   │   ├── 📄 auth.js                   # Auth events
+│   │   │   ├── 📄 alert.js                  # Alert events
+│   │   │   ├── 📄 scan.js                   # Scan progress
+│   │   │   ├── 📄 assessment.js             # Assessment events
+│   │   │   ├── 📄 metric.js                 # Metrics
+│   │   │   ├── 📄 notification.js           # Notifications
+│   │   │   └── 📄 file.js                   # File events
 │   │   │
-│   │   ├── 📁 rooms/
-│   │   │   ├── 📄 userRoom.js
-│   │   │   ├── 📄 serverRoom.js
-│   │   │   ├── 📄 adminRoom.js
-│   │   │   └── 📄 fileRoom.js
+│   │   ├── 📁 rooms/                        # Room management (4 file)
+│   │   │   ├── 📄 userRoom.js               # User rooms
+│   │   │   ├── 📄 serverRoom.js             # Server rooms
+│   │   │   ├── 📄 adminRoom.js              # Admin broadcast
+│   │   │   └── 📄 fileRoom.js               # File share rooms
 │   │   │
-│   │   └── 📁 utils/
-│   │       ├── 📄 logger.js
-│   │       └── 📄 helpers.js
+│   │   └── 📁 utils/                        # Utilities (2 file)
+│   │       ├── 📄 logger.js                 # Log utility
+│   │       └── 📄 helpers.js                # Helper functions
 │   │
-│   └── 📁 tests/
-│       ├── 📄 socket.test.js
-│       └── 📄 handler.test.js
+│   └── 📁 tests/                            # Tests (2 file)
+│       ├── 📄 socket.test.js                # Socket tests
+│       └── 📄 handler.test.js               # Handler tests
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║  🗄️ DATABASE/ - SQL SCRIPTS
+║  🗄️ DATABASE/ - SQL SCRIPTS (25 files)
 ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 │
 ├── 📁 database/
 │   │
-│   ├── 📄 schema.sql
-│   ├── 📄 seed_all.sql
-│   ├── 📄 seed_categories_17.sql
-│   ├── 📄 seed_criteria_280.sql
-│   ├── 📄 seed_roles.sql
-│   ├── 📄 seed_permissions.sql
-│   ├── 📄 seed_users.sql
-│   ├── 📄 seed_assessment_files.sql
+│   ├── 📄 schema.sql                        # Full database schema
+│   ├── 📄 seed_all.sql                      # Seed all data
+│   ├── 📄 seed_categories_17.sql            # Seed 17 categories
+│   ├── 📄 seed_criteria_280.sql             # Seed 280 criteria
+│   ├── 📄 seed_roles.sql                    # Seed roles
+│   ├── 📄 seed_permissions.sql              # Seed permissions
+│   ├── 📄 seed_users.sql                    # Seed users
+│   ├── 📄 seed_assessment_files.sql         # Seed files
 │   │
-│   ├── 📁 migrations/
+│   ├── 📁 migrations/                       # SQL migrations (12 file)
 │   │   ├── 📄 V1__Create_users_table.sql
 │   │   ├── 📄 V2__Create_roles_table.sql
 │   │   ├── 📄 V3__Create_categories_table.sql
@@ -999,36 +950,36 @@ security-assessment-platform/
 │   │   ├── 📄 V11__Create_assessment_files_table.sql
 │   │   └── 📄 V12__Add_indexes.sql
 │   │
-│   ├── 📁 procedures/
+│   ├── 📁 procedures/                      # Stored procedures (4 file)
 │   │   ├── 📄 sp_calculate_score.sql
 │   │   ├── 📄 sp_get_dashboard_stats.sql
 │   │   ├── 📄 sp_cleanup_old_logs.sql
 │   │   └── 📄 sp_generate_report.sql
 │   │
-│   ├── 📁 triggers/
+│   ├── 📁 triggers/                        # Database triggers (3 file)
 │   │   ├── 📄 trg_audit_user_changes.sql
 │   │   ├── 📄 trg_update_server_score.sql
 │   │   └── 📄 trg_create_alert_on_fail.sql
 │   │
-│   └── 📁 views/
+│   └── 📁 views/                           # Database views (3 file)
 │       ├── 📄 vw_server_summary.sql
 │       ├── 📄 vw_compliance_status.sql
 │       └── 📄 vw_monthly_trend.sql
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║  📚 DOCS/ - DOCUMENTATION
+║  📚 DOCS/ - DOCUMENTATION (25 files)
 ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 │
 ├── 📁 docs/
 │   │
-│   ├── 📄 README.md
-│   ├── 📄 INSTALLATION.md
-│   ├── 📄 DEPLOYMENT.md
-│   ├── 📄 API.md
-│   ├── 📄 TESTING.md
-│   ├── 📄 CONTRIBUTING.md
+│   ├── 📄 README.md                        # Documentation index
+│   ├── 📄 INSTALLATION.md                  # Installation guide
+│   ├── 📄 DEPLOYMENT.md                    # Deployment guide
+│   ├── 📄 API.md                           # API documentation
+│   ├── 📄 TESTING.md                       # Testing guide
+│   ├── 📄 CONTRIBUTING.md                  # Contributing guide
 │   │
-│   ├── 📁 api/
+│   ├── 📁 api/                             # API docs (16 file)
 │   │   ├── 📄 authentication.md
 │   │   ├── 📄 users.md
 │   │   ├── 📄 roles.md
@@ -1046,73 +997,72 @@ security-assessment-platform/
 │   │   ├── 📄 testing.md
 │   │   └── 📄 openapi.yaml
 │   │
-│   ├── 📁 guides/
+│   ├── 📁 guides/                         # User guides (5 file)
 │   │   ├── 📄 user-manual.md
 │   │   ├── 📄 admin-manual.md
 │   │   ├── 📄 security-officer-guide.md
 │   │   ├── 📄 viewer-guide.md
 │   │   └── 📄 auditor-guide.md
 │   │
-│   ├── 📁 references/
+│   ├── 📁 references/                     # References (5 file)
 │   │   ├── 📄 280-criteria-list.md
 │   │   ├── 📄 17-categories.md
 │   │   ├── 📄 scoring-formula.md
 │   │   ├── 📄 rbac-matrix.md
 │   │   └── 📄 compliance-mapping.md
 │   │
-│   └── 📁 architecture/
+│   └── 📁 architecture/                   # Architecture docs (4 file)
 │       ├── 📄 system-architecture.png
 │       ├── 📄 database-er-diagram.png
 │       ├── 📄 sequence-diagrams.md
 │       └── 📄 deployment-architecture.png
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║  🔧 SCRIPTS/ - UTILITY SCRIPTS
+║  🔧 SCRIPTS/ - UTILITY SCRIPTS (16 files)
 ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 │
 ├── 📁 scripts/
-│   │
-│   ├── 📄 deploy.sh
-│   ├── 📄 backup.sh
-│   ├── 📄 restore.sh
-│   ├── 📄 import_criteria.php
-│   ├── 📄 export_criteria.php
-│   ├── 📄 run_assessment.php
-│   ├── 📄 clean_logs.php
-│   ├── 📄 create_admin.php
-│   ├── 📄 reset_password.php
-│   ├── 📄 generate_report.php
-│   ├── 📄 monitor.php
-│   ├── 📄 sync_servers.php
-│   ├── 📄 run_tests.sh
-│   ├── 📄 test_report_generator.php
-│   ├── 📄 migrate_assessment_files.php
-│   └── 📄 install_docker.sh
+│   ├── 📄 deploy.sh                        # Deploy script
+│   ├── 📄 backup.sh                        # Backup script
+│   ├── 📄 restore.sh                       # Restore script
+│   ├── 📄 import_criteria.php              # Import criteria from Excel
+│   ├── 📄 export_criteria.php              # Export criteria to Excel
+│   ├── 📄 run_assessment.php               # Run assessment from CLI
+│   ├── 📄 clean_logs.php                   # Clean old logs
+│   ├── 📄 create_admin.php                 # Create admin user
+│   ├── 📄 reset_password.php               # Reset user password
+│   ├── 📄 generate_report.php              # Generate report from CLI
+│   ├── 📄 monitor.php                      # System monitor
+│   ├── 📄 sync_servers.php                 # Sync servers
+│   ├── 📄 run_tests.sh                     # Run all tests
+│   ├── 📄 test_report_generator.php        # Generate test report
+│   ├── 📄 migrate_assessment_files.php     # Migrate assessment files
+│   └── 📄 install_docker.sh                # Install Docker
 │
 ├═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║  🚀 CI/CD & DEPLOYMENT
+║  🚀 CI/CD & DEPLOYMENT (15 files)
 ╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 │
 ├── 📁 .github/
-│   └── 📁 workflows/
-│       ├── 📄 deploy.yml
-│       ├── 📄 test.yml
-│       ├── 📄 backup.yml
-│       ├── 📄 security-scan.yml
-│       └── 📄 lint.yml
+│   └── 📁 workflows/                       # GitHub Actions (5 file)
+│       ├── 📄 deploy.yml                   # Deploy workflow
+│       ├── 📄 test.yml                     # Run tests workflow
+│       ├── 📄 backup.yml                   # Backup workflow
+│       ├── 📄 security-scan.yml            # Security scan workflow
+│       └── 📄 lint.yml                     # Lint workflow
 │
-├── 📁 .docker/
-│   ├── 📄 Dockerfile.php
-│   ├── 📄 Dockerfile.nginx
-│   ├── 📄 Dockerfile.node
-│   ├── 📄 docker-entrypoint.sh
-│   └── 📄 nginx.conf
+├── 📁 .docker/                             # Docker configs (5 file)
+│   ├── 📄 Dockerfile.php                   # PHP container
+│   ├── 📄 Dockerfile.nginx                 # Nginx container
+│   ├── 📄 Dockerfile.node                  # Node container
+│   ├── 📄 docker-entrypoint.sh             # Entrypoint script
+│   └── 📄 nginx.conf                       # Nginx config
 │
-└── 📁 .k8s/
-    ├── 📄 deployment.yaml
-    ├── 📄 service.yaml
-    ├── 📄 ingress.yaml
-    ├── 📄 configmap.yaml
-    ├── 📄 secret.yaml
-    ├── 📄 hpa.yaml
-    └── 📄 pvc.yaml
+└── 📁 .k8s/                                # Kubernetes configs (7 file)
+    ├── 📄 deployment.yaml                  # K8s deployment
+    ├── 📄 service.yaml                     # K8s service
+    ├── 📄 ingress.yaml                     # K8s ingress
+    ├── 📄 configmap.yaml                   # K8s configmap
+    ├── 📄 secret.yaml                      # K8s secret
+    ├── 📄 hpa.yaml                         # Horizontal Pod Autoscaler
+    └── 📄 pvc.yaml                         # Persistent Volume Claim
