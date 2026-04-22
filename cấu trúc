@@ -395,30 +395,64 @@ security-assessment-platform/
 │   │   │   │   ├── 📄 forgot-password.blade.php
 │   │   │   │   ├── 📄 reset-password.blade.php
 │   │   │   │   └── 📄 two-factor.blade.php
-│   │   │   ├── 📁 super-admin/          # Super Admin pages
-│   │   │   │   ├── 📄 dashboard.blade.php
-│   │   │   │   ├── 📄 users.blade.php
-│   │   │   │   ├── 📄 roles.blade.php
-│   │   │   │   ├── 📄 servers.blade.php
-│   │   │   │   ├── 📄 categories.blade.php
-│   │   │   │   ├── 📄 criteria.blade.php
-│   │   │   │   ├── 📄 assessments.blade.php
-│   │   │   │   ├── 📄 assessment-files.blade.php
-│   │   │   │   ├── 📄 vulnerabilities.blade.php
-│   │   │   │   ├── 📄 alerts.blade.php
-│   │   │   │   ├── 📄 reports.blade.php
-│   │   │   │   ├── 📄 backup.blade.php
-│   │   │   │   ├── 📄 audit.blade.php
-│   │   │   │   ├── 📄 settings.blade.php
-│   │   │   │   └── 📁 testing/
-│   │   │   │       ├── 📄 index.blade.php
-│   │   │   │       ├── 📄 runner.blade.php
-│   │   │   │       └── 📄 results.blade.php
-│   │   │   ├── 📁 admin/                # Admin pages
-│   │   │   ├── 📁 security-officer/     # Security Officer pages
-│   │   │   ├── 📁 viewer/               # Viewer pages
-│   │   │   ├── 📁 auditor/              # Auditor pages
-│   │   │   └── 📁 common/               # Common pages
+frontend/src/views/
+│
+├── 📁 super-admin/                                    # LEVEL 1: Super Admin
+│   │
+│   ├── 📄 Dashboard.vue                               # LEVEL 2: Trang tổng quan
+│   ├── 📄 Users.vue                                   # LEVEL 2: Quản lý user
+│   ├── 📄 Roles.vue                                   # LEVEL 2: Quản lý role
+│   ├── 📄 Servers.vue                                 # LEVEL 2: Quản lý server
+│   ├── 📄 Categories.vue                              # LEVEL 2: Quản lý danh mục
+│   ├── 📄 Criteria.vue                                # LEVEL 2: Quản lý tiêu chí
+│   ├── 📄 Assessments.vue                             # LEVEL 2: Quản lý đánh giá
+│   ├── 📄 AssessmentFiles.vue                         # LEVEL 2: Quản lý tệp
+│   ├── 📄 Vulnerabilities.vue                         # LEVEL 2: Quản lý lỗ hổng
+│   ├── 📄 Alerts.vue                                  # LEVEL 2: Quản lý cảnh báo
+│   ├── 📄 Reports.vue                                 # LEVEL 2: Quản lý báo cáo
+│   ├── 📄 Backup.vue                                  # LEVEL 2: Quản lý backup
+│   ├── 📄 Audit.vue                                   # LEVEL 2: Xem audit log
+│   ├── 📄 Settings.vue                                # LEVEL 2: Cài đặt hệ thống
+│   │
+│   └── 📁 testing/                                    # LEVEL 2: Thư mục testing
+│       ├── 📄 Index.vue                               # LEVEL 3: Dashboard test
+│       ├── 📄 Runner.vue                              # LEVEL 3: Chạy test
+│       └── 📄 Results.vue                             # LEVEL 3: Kết quả test
+│
+├── 📁 admin/                                          # LEVEL 1: Admin
+│   ├── 📄 Dashboard.vue                               # LEVEL 2
+│   ├── 📄 Users.vue                                   # LEVEL 2
+│   ├── 📄 Roles.vue                                   # LEVEL 2
+│   ├── 📄 Servers.vue                                 # LEVEL 2
+│   ├── 📄 Criteria.vue                                # LEVEL 2
+│   ├── 📄 Assessments.vue                             # LEVEL 2
+│   ├── 📄 AssessmentFiles.vue                         # LEVEL 2
+│   ├── 📄 Vulnerabilities.vue                         # LEVEL 2
+│   ├── 📄 Alerts.vue                                  # LEVEL 2
+│   ├── 📄 Reports.vue                                 # LEVEL 2
+│   ├── 📄 Backup.vue                                  # LEVEL 2
+│   └── 📄 Settings.vue                                # LEVEL 2
+│
+├── 📁 security-officer/                               # LEVEL 1: Security Officer
+│   ├── 📄 Dashboard.vue                               # LEVEL 2
+│   ├── 📄 Servers.vue                                 # LEVEL 2
+│   ├── 📄 Assessments.vue                             # LEVEL 2
+│   ├── 📄 AssessmentFiles.vue                         # LEVEL 2
+│   ├── 📄 Vulnerabilities.vue                         # LEVEL 2
+│   ├── 📄 Alerts.vue                                  # LEVEL 2
+│   └── 📄 Reports.vue                                 # LEVEL 2
+│
+├── 📁 viewer/                                         # LEVEL 1: Viewer
+│   ├── 📄 Dashboard.vue                               # LEVEL 2
+│   ├── 📄 Reports.vue                                 # LEVEL 2
+│   ├── 📄 ComplianceStatus.vue                        # LEVEL 2
+│   └── 📄 ServerList.vue                              # LEVEL 2
+│
+└── 📁 auditor/                                        # LEVEL 1: Auditor
+    ├── 📄 Dashboard.vue                               # LEVEL 2
+    ├── 📄 AuditLogs.vue                               # LEVEL 2
+    ├── 📄 UserActivities.vue                          # LEVEL 2
+    └── 📄 Reports.vue                                 # LEVEL 2
 │   │   │       ├── 📄 404.blade.php
 │   │   │       ├── 📄 403.blade.php
 │   │   │       ├── 📄 500.blade.php
