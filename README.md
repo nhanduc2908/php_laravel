@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 🔐 Security Assessment Platform
 
 ## Giới thiệu
@@ -18,6 +19,8 @@ cp .env.example .env
 docker-compose up -d
 docker exec security-php php artisan migrate --seed
 =======
+=======
+>>>>>>> c13054b (save before pull)
 # 📄 FILE README.md - HOÀN THIỆN NGẮN GỌN
 
 ```markdown
@@ -377,4 +380,27 @@ mysql:
 	docker exec -it security-mysql mysql -uroot -proot123 security_platform
 ```
 
+<<<<<<< HEAD
 >>>>>>> 38e4814 (Create README.md)
+=======
+=======
+# 🔐 Security Assessment Platform
+
+## Giới thiệu
+Nền tảng đánh giá an ninh mạng với 280 tiêu chí, 17 danh mục.
+
+## Yêu cầu
+- PHP >= 8.1
+- MySQL >= 8.0
+- Node.js >= 18
+- Docker (khuyến nghị)
+
+## Cài đặt nhanh
+
+### Docker
+```bash
+cp .env.example .env
+docker-compose up -d
+docker exec security-php php artisan migrate --seed
+>>>>>>> bba8ffc (update)
+>>>>>>> c13054b (save before pull)
