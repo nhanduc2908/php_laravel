@@ -1,0 +1,140 @@
+/**
+ * RESPONSIVE CSS
+ * Responsive design cho mọi thiết bị
+ */
+
+/* Desktop (1200px and above) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+}
+
+/* Laptop (992px to 1199px) */
+@media (max-width: 1199px) {
+    html {
+        font-size: 15px;
+    }
+    
+    .sidebar {
+        width: 240px;
+    }
+    
+    .sidebar.collapsed {
+        width: 64px;
+    }
+}
+
+/* Tablet (768px to 991px) */
+@media (max-width: 991px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .sidebar {
+        position: fixed;
+        left: -280px;
+        z-index: 1000;
+        transition: left 0.3s;
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .charts-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .data-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* Mobile (576px to 767px) */
+@media (max-width: 767px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card {
+        padding: var(--spacing-md);
+    }
+    
+    .btn {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    .form-control {
+        font-size: 16px; /* Prevent zoom on mobile */
+    }
+    
+    .modal-content {
+        margin: var(--spacing-md);
+        width: calc(100% - 2rem);
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Small Mobile (below 576px) */
+@media (max-width: 575px) {
+    .hide-on-mobile {
+        display: none;
+    }
+    
+    .stack-on-mobile {
+        flex-direction: column;
+    }
+    
+    .full-width-mobile {
+        width: 100%;
+    }
+    
+    .text-center-mobile {
+        text-align: center;
+    }
+    
+    .p-3 {
+        padding: var(--spacing-md);
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print,
+    .sidebar,
+    .app-header,
+    .btn {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}

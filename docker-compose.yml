@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nginx:
+    ports:
+      - "8080:80"      # Web server
+      - "443:443"      # HTTPS (nếu có SSL)
+
+  mysql:
+    ports:
+      - "3306:3306"    # Database
+
+  redis:
+    ports:
+      - "6379:6379"    # Cache
+
+  realtime:
+    ports:
+      - "3000:3000"    # WebSocket
+
+  phpmyadmin:
+    ports:
+      - "8081:80"      # Database GUI
+
+  mailhog:
+    ports:
+      - "8025:8025"    # Email GUI
+      - "1025:1025"    # SMTP
+
+  redis-commander:
+    ports:
+      - "8082:8081"    # Redis GUI

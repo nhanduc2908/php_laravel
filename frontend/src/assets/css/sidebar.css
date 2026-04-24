@@ -1,0 +1,197 @@
+/**
+ * SIDEBAR CSS
+ * Style cho sidebar có thể ẩn/hiện
+ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background: var(--bg-sidebar);
+    box-shadow: var(--shadow-md);
+    transition: width 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Sidebar collapsed state (thu nhỏ) */
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed .nav-section-title,
+.sidebar.collapsed .submenu {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link {
+    justify-content: center;
+    padding: 0.75rem;
+}
+
+.sidebar.collapsed .nav-link i {
+    margin-right: 0;
+    font-size: 1.25rem;
+}
+
+/* Sidebar hidden state (ẩn hoàn toàn) */
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Sidebar on mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+}
+
+/* Sidebar header */
+.sidebar-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.sidebar-logo img {
+    width: 32px;
+    height: 32px;
+}
+
+.sidebar-logo span {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.sidebar-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+}
+
+.sidebar-toggle:hover {
+    background: var(--bg-secondary);
+}
+
+/* Navigation */
+.nav-list {
+    list-style: none;
+    padding: var(--spacing-md) 0;
+}
+
+.nav-item {
+    margin-bottom: var(--spacing-xs);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 0.75rem var(--spacing-lg);
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.nav-link.active {
+    background: var(--primary-50);
+    color: var(--primary-600);
+    border-right: 3px solid var(--primary-600);
+}
+
+.nav-link i {
+    width: 20px;
+    font-size: 1.1rem;
+}
+
+.nav-label {
+    flex: 1;
+}
+
+.nav-section-title {
+    padding: var(--spacing-md) var(--spacing-lg) var(--spacing-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+
+/* Submenu */
+.submenu {
+    list-style: none;
+    padding-left: var(--spacing-xl);
+}
+
+.submenu-item {
+    margin-bottom: var(--spacing-xs);
+}
+
+.submenu-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 0.5rem var(--spacing-lg);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.submenu-link:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.submenu-link.active {
+    color: var(--primary-600);
+    font-weight: 500;
+}
+
+/* Submenu animation */
+.submenu-enter-active,
+.submenu-leave-active {
+    transition: all 0.2s ease;
+}
+
+.submenu-enter-from,
+.submenu-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+}

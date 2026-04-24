@@ -1,0 +1,6 @@
+{
+    "require": {
+        "spatie/laravel-permission": "^6.25",
+        "barryvdh/laravel-dompdf": "^2.2"
+    }
+}

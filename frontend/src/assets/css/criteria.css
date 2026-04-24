@@ -1,0 +1,77 @@
+/**
+ * CRITERIA CSS
+ * Style cho trang quản lý tiêu chí
+ */
+
+.criteria-container {
+    padding: var(--spacing-lg);
+}
+
+.categories-sidebar {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.category-tree {
+    list-style: none;
+    padding-left: 0;
+}
+
+.category-item {
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: background 0.2s;
+}
+
+.category-item:hover {
+    background: var(--bg-secondary);
+}
+
+.category-item.active {
+    background: var(--primary-50);
+    color: var(--primary-600);
+    font-weight: 500;
+}
+
+.category-children {
+    list-style: none;
+    padding-left: var(--spacing-lg);
+}
+
+.criteria-table {
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+}
+
+.criteria-code {
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--primary-600);
+}
+
+.criteria-weight {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    padding: 0.25rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+.weight-slider {
+    width: 100%;
+    margin: var(--spacing-md) 0;
+}
+
+.weight-value {
+    display: inline-block;
+    margin-left: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--primary-600);
+}

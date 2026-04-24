@@ -1,0 +1,136 @@
+/**
+ * TESTING CSS
+ * Style cho trang kiểm thử
+ */
+
+.testing-container {
+    padding: var(--spacing-lg);
+}
+
+.test-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.test-stat-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.test-stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+}
+
+.test-stat-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.test-stat-card.passed .test-stat-value { color: var(--success); }
+.test-stat-card.failed .test-stat-value { color: var(--danger); }
+.test-stat-card.skipped .test-stat-value { color: var(--warning); }
+
+.test-runner {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.test-output {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    font-family: monospace;
+    font-size: 0.875rem;
+    overflow-x: auto;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.test-suite {
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.test-suite-header {
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.test-suite-header:hover {
+    background: var(--border-color);
+}
+
+.test-case {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.test-case.passed {
+    border-left: 3px solid var(--success);
+}
+
+.test-case.failed {
+    border-left: 3px solid var(--danger);
+}
+
+.test-case.skipped {
+    border-left: 3px solid var(--warning);
+}
+
+.test-status-icon {
+    width: 20px;
+    text-align: center;
+}
+
+.test-case-name {
+    flex: 1;
+}
+
+.test-duration {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.coverage-bar {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    height: 8px;
+    overflow: hidden;
+}
+
+.coverage-fill {
+    background: var(--success);
+    height: 100%;
+    transition: width 0.3s;
+}
+
+.coverage-fill.low {
+    background: var(--danger);
+}
+
+.coverage-fill.medium {
+    background: var(--warning);
+}
+
+.coverage-fill.high {
+    background: var(--success);
+}

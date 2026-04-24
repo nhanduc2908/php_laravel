@@ -1,0 +1,6 @@
+Đây là file ico (icon) cho trình duyệt. Bạn cần tạo file này bằng công cụ tạo favicon online.
+Kích thước khuyến nghị: 16x16, 32x32, 48x48 pixels.
+
+Có thể tạo tại: https://favicon.io/ hoặc https://www.favicon-generator.org/
+
+Sau khi tạo, đặt file favicon.ico vào thư mục public/

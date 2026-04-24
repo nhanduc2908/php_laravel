@@ -1,0 +1,127 @@
+/**
+ * PRINT CSS
+ * Style khi in báo cáo
+ */
+
+@media print {
+    /* Hide non-printable elements */
+    .no-print,
+    .sidebar,
+    .app-header,
+    .btn,
+    .btn-actions,
+    .pagination,
+    .filters,
+    .actions-cell,
+    .print-hide {
+        display: none !important;
+    }
+    
+    /* Show printable content */
+    .print-only {
+        display: block !important;
+    }
+    
+    /* Page setup */
+    @page {
+        size: A4;
+        margin: 2cm;
+    }
+    
+    /* Typography */
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+    }
+    
+    h1 {
+        font-size: 18pt;
+        margin-bottom: 0.5cm;
+    }
+    
+    h2 {
+        font-size: 16pt;
+        margin-bottom: 0.3cm;
+    }
+    
+    h3 {
+        font-size: 14pt;
+        margin-bottom: 0.2cm;
+    }
+    
+    /* Links */
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 10pt;
+        color: #666;
+    }
+    
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0.5cm;
+    }
+    
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    th {
+        background: #f5f5f5;
+        font-weight: bold;
+    }
+    
+    /* Page breaks */
+    .page-break {
+        page-break-before: always;
+    }
+    
+    .avoid-break {
+        page-break-inside: avoid;
+    }
+    
+    /* Report specific */
+    .report-header {
+        text-align: center;
+        margin-bottom: 1cm;
+        border-bottom: 2px solid #333;
+        padding-bottom: 0.5cm;
+    }
+    
+    .report-footer {
+        text-align: center;
+        margin-top: 1cm;
+        border-top: 1px solid #ddd;
+        padding-top: 0.5cm;
+        font-size: 10pt;
+        color: #666;
+    }
+    
+    .score-card {
+        border: 1px solid #ddd;
+        padding: 0.5cm;
+        margin-bottom: 0.5cm;
+        border-radius: 5px;
+    }
+    
+    .score-large {
+        font-size: 24pt;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .compliance-gauge {
+        width: 200px;
+        margin: 0 auto;
+    }
+}

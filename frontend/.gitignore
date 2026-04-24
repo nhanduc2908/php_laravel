@@ -1,0 +1,51 @@
+# Dependencies
+/node_modules
+/node_modules/.bin
+/package-lock.json
+/yarn.lock
+
+# Build files
+/dist
+/build
+/.vite
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Coverage
+/coverage
+/coverage.lcov
+
+# Misc
+*.local
+*.backup
+*.tmp
+.cache
+.parcel-cache
