@@ -1,0 +1,1 @@
+<template><div><h2>Kết quả test</h2><table class="data-table"><thead><tr><th>Test</th><th>Trạng thái</th><th>Thời gian</th></tr></thead><tbody><tr v-for="result in results" :key="result.id"><td>{{ result.name }}</td><td>{{ result.status }}</td><td>{{ result.duration }}ms</td></tr></tbody></table></div></template>

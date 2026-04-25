@@ -1,0 +1,4 @@
+<template><div><h2>Quản lý người dùng</h2><DataTable :columns="columns" :data="users" :actions="true"><template #actions="{ row }"><button @click="editUser(row)"><i class="fas fa-edit"></i></button><button @click="deleteUser(row.id)"><i class="fas fa-trash"></i></button></template></DataTable></div></template>
+<script setup>import { ref, onMounted } from 'vue'; import DataTable from '@/components/common/DataTable.vue'
+const users = ref([]); const columns = [{ key: 'name', label: 'Tên' }, { key: 'email', label: 'Email' }, { key: 'role_name', label: 'Vai trò' }]
+onMounted(async () => { const res = await fetch('/api/v1/users'); users.value = (await res.json()).data.data }) </script>
